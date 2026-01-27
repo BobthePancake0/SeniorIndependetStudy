@@ -42,12 +42,12 @@ horizontal_alignment = 1
 
 [node name="StateMachine" type="Node" parent="." unique_id=349134493 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_g2els")
-initial_state = NodePath("MoveState")
+initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine" unique_id=763769217 node_paths=PackedStringArray("player")]
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=763769217 node_paths=PackedStringArray("player", "state_machine")]
 script = ExtResource("3_qhqgy")
 player = NodePath("../..")
+state_machine = NodePath("..")
 
-[node name="MoveState" type="Node" parent="StateMachine" unique_id=654932214 node_paths=PackedStringArray("player")]
+[node name="MoveState" type="Node" parent="StateMachine" unique_id=654932214]
 script = ExtResource("5_qlg0r")
-player = NodePath("../..")
