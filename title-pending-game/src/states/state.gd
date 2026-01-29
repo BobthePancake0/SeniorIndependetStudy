@@ -5,7 +5,7 @@ extends Node
 
 signal Transitioned
 
-@export var player : CharacterBody2D
+@export var player : Character
 
 func enter() -> void:
 	pass
@@ -18,3 +18,4 @@ func update(_delta : float) -> void:
 
 func physics_update(_delta : float) -> void:
 	pass
+	

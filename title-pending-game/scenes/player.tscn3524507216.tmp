@@ -69,7 +69,7 @@ player = NodePath("../..")
 [node name="DamagedState" type="Node" parent="StateMachine" unique_id=1051840031 node_paths=PackedStringArray("timer", "player")]
 script = ExtResource("6_fjrip")
 timer = NodePath("Timer")
-knockback_force = 50.0
+knockback_force = 500.0
 player = NodePath("../..")
 
 [node name="Timer" type="Timer" parent="StateMachine/DamagedState" unique_id=291954406]

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ddsupc5ijrbw4"]
+
+[ext_resource type="Script" uid="uid://crw7c0xe0bcop" path="res://src/testing_damage.gd" id="1_q8dte"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gadhp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q8dte"]
+radius = 8.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=332754568]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_q8dte")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1673639974]
+shape = SubResource("RectangleShape2D_gadhp")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=591393561 groups=["HitBox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1282395022]
+shape = SubResource("CircleShape2D_q8dte")
+debug_color = Color(1, 0.6, 0.69803923, 0.41960785)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

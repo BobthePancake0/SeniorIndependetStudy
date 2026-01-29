@@ -19,6 +19,12 @@ run/main_scene="uid://bxaiycxbykxvd"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[global_group]
+
+Player=""
+HitBox=""
+HurtBox=""
+
 [input]
 
 move_right={
@@ -50,3 +56,4 @@ move_up={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="World"
+2d_physics/layer_3="Enemy"
