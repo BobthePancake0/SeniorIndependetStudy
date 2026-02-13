@@ -3,10 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://bfyohjlc432ba" path="res://icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bx4ekhvrqqqxd" path="res://src/player/character.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://ci7na7klbdv3h" path="res://src/states/state_machine.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/Stats.gd" id="2_tuyoq"]
 [ext_resource type="Script" uid="uid://cuqnpgaq3w7y7" path="res://src/states/player/idle_state.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="4_fjrip"]
+[ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_smehm"]
 [ext_resource type="Script" uid="uid://kty5y33cda7p" path="res://src/states/player/move_state.gd" id="5_qlg0r"]
-[ext_resource type="Script" uid="uid://c8omx3f7vhle7" path="res://src/states/player/damaged_state.gd" id="6_fjrip"]
-[ext_resource type="Script" uid="uid://dr0vhx3cf2ob5" path="res://src/managers/health_manager.gd" id="6_tuyoq"]
+
+[sub_resource type="Resource" id="Resource_fjrip"]
+script = ExtResource("2_tuyoq")
+damage = 10
+metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
 animations = [{
@@ -19,26 +25,314 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_smehm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ur7pv"]
+resource_name = "diagonal_dl_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.356194490192345]
+}
+
+[sub_resource type="Animation" id="Animation_y4r1p"]
+resource_name = "diagonal_dr_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7853981633974483]
+}
+
+[sub_resource type="Animation" id="Animation_3v2ag"]
+resource_name = "diagonal_ul_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.9269908169872414]
+}
+
+[sub_resource type="Animation" id="Animation_jej6c"]
+resource_name = "diagonal_ur_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.497787143782138]
+}
+
+[sub_resource type="Animation" id="Animation_d2wvv"]
+resource_name = "down_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5707963267948966]
+}
+
+[sub_resource type="Animation" id="Animation_oprun"]
+resource_name = "horizontal_l_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.141592653589793]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "horizontal_r_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_f1ej7"]
+resource_name = "up_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.71238898038469]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smehm"]
+_data = {
+&"RESET": SubResource("Animation_smehm"),
+&"diagonal_dl_attack": SubResource("Animation_ur7pv"),
+&"diagonal_dr_attack": SubResource("Animation_y4r1p"),
+&"diagonal_ul_attack": SubResource("Animation_3v2ag"),
+&"diagonal_ur_attack": SubResource("Animation_jej6c"),
+&"down_attack": SubResource("Animation_d2wvv"),
+&"horizontal_l_attack": SubResource("Animation_oprun"),
+&"horizontal_r_attack": SubResource("Animation_fjrip"),
+&"up_attack": SubResource("Animation_f1ej7")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(119, 118)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ur7pv"]
+radius = 83.14531
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 58.54012
 
-[node name="Player" type="CharacterBody2D" unique_id=807857446 node_paths=PackedStringArray("health_manager", "hurt_box") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=807857446 node_paths=PackedStringArray("hurt_box") groups=["Player"]]
 scale = Vector2(0.7523974, 0.7523974)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_g2els")
-health_manager = NodePath("HealthManager")
+stats = SubResource("Resource_fjrip")
 hurt_box = NodePath("HurtBox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=598172439]
 sprite_frames = SubResource("SpriteFrames_g2els")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=619613801]
+libraries/ = SubResource("AnimationLibrary_smehm")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1694851801]
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_qhqgy")
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=977158760 groups=["HurtBox", "Player"]]
+[node name="HitBoxes" type="Node2D" parent="." unique_id=992294143]
+
+[node name="Marker2D" type="Marker2D" parent="HitBoxes" unique_id=1987497555]
+
+[node name="Area2D" type="Area2D" parent="HitBoxes/Marker2D" unique_id=971331971]
+position = Vector2(164.80652, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_smehm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/Marker2D/Area2D" unique_id=716134850]
+shape = SubResource("CircleShape2D_ur7pv")
+disabled = true
+debug_color = Color(0.87155205, 0.30202132, 0.46169508, 0.41960785)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=977158760]
+script = ExtResource("4_fjrip")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=355075071]
 rotation = 0.0028113136
@@ -65,17 +359,3 @@ player = NodePath("../..")
 [node name="MoveState" type="Node" parent="StateMachine" unique_id=654932214 node_paths=PackedStringArray("player")]
 script = ExtResource("5_qlg0r")
 player = NodePath("../..")
-
-[node name="DamagedState" type="Node" parent="StateMachine" unique_id=1051840031 node_paths=PackedStringArray("timer", "player")]
-script = ExtResource("6_fjrip")
-timer = NodePath("Timer")
-knockback_force = 50.0
-player = NodePath("../..")
-
-[node name="Timer" type="Timer" parent="StateMachine/DamagedState" unique_id=291954406]
-
-[node name="HealthManager" type="Node" parent="." unique_id=191525664]
-script = ExtResource("6_tuyoq")
-
-[connection signal="timeout" from="StateMachine/DamagedState/Timer" to="StateMachine/DamagedState" method="_on_timer_timeout"]
-[connection signal="is_damaged" from="HealthManager" to="StateMachine/MoveState" method="_on_health_manager_is_damaged"]

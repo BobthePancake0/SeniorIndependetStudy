@@ -1,14 +1,13 @@
+class_name Enemy
 extends CharacterBody2D
 
-@export var damage : int = 10
+@export var stats : Stats
 
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
+func _ready() -> void:
+	stats.health_depleted.connect(_on_health_depleted)
 	
-	if area.is_in_group("Player") && area.is_in_group("HurtBox"):
-		var player : Character = area.get_parent()
-		
-		player.collided_with = self
-		player.health_manager.take_damage(damage)
-	
-	pass # Replace with function body.
+
+func _on_health_depleted() -> void:
+	print("Should be DEAD!")
+	queue_free()

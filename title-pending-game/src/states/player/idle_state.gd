@@ -14,7 +14,13 @@ func enter() -> void:
 
 func physics_update(_delta : float) -> void:
 
-	if player.get_movement_direction().length() != 0:
-		Transitioned.emit(self, "MoveState")
+	#if player.get_movement_direction().length() != 0:
+		#Transitioned.emit(self, "MoveState")
 	
+	pass
+
+func handle_input(_event : InputEvent) -> void:
+	if (_event.is_action("move_left") || _event.is_action("move_right") || _event.is_action("move_up") || _event.is_action("move_down")) and not _event.is_echo():
+		Transitioned.emit(self, "MoveState")
+
 	pass
