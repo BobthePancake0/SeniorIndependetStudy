@@ -22,5 +22,8 @@ func physics_update(_delta : float) -> void:
 func handle_input(_event : InputEvent) -> void:
 	if (_event.is_action("move_left") || _event.is_action("move_right") || _event.is_action("move_up") || _event.is_action("move_down")) and not _event.is_echo():
 		Transitioned.emit(self, "MoveState")
+		
+	if _event.is_action_pressed("attack") and not _event.is_echo():
+		Transitioned.emit(self, "AttackState")
 
 	pass

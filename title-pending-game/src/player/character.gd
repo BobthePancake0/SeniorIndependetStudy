@@ -2,7 +2,7 @@ class_name Character
 extends CharacterBody2D
 
 enum Direction {NULL, RIGHT, D_RIGHT, DOWN, D_LEFT, LEFT, U_LEFT, UP, U_RIGHT}
-var direction : Direction
+var direction : Direction = Direction.RIGHT
 
 @export var stats : Stats
 #@export var hitbox_shape : Shape2D
@@ -58,8 +58,8 @@ func setDirection(dir : Vector2) -> Direction:
 		return Direction.UP
 	elif dir. x > 0 && dir.y < 0:
 		return Direction.U_RIGHT
-	
-	return Direction.NULL
+
+	return direction
 	
 func matchAttackAngle() -> String:
 	match direction:
@@ -81,5 +81,4 @@ func matchAttackAngle() -> String:
 			return "diagonal_ur_attack"
 		_:
 			return "RESET"
-	pass
 	

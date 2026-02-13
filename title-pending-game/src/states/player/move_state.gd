@@ -18,6 +18,8 @@ func physics_update(_delta : float) -> void:
 func handle_input(_event : InputEvent) -> void:
 	#if (_event.is_action_released("move_down") || _event.is_action_released("move_right") || _event.is_action_released("move_up") || _event.is_action_released("move_down")) && not _event.is_echo():
 		#Transitioned.emit(self, "IdleState")
+	if _event.is_action_pressed("attack") and not _event.is_echo():
+		Transitioned.emit(self, "AttackState")
 	pass
 
 func move_player() -> void:

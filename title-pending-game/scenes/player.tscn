@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="4_fjrip"]
 [ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_smehm"]
 [ext_resource type="Script" uid="uid://kty5y33cda7p" path="res://src/states/player/move_state.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://dl2cijdjioh5o" path="res://src/states/player/attack_state.gd" id="9_ur7pv"]
 
 [sub_resource type="Resource" id="Resource_fjrip"]
 script = ExtResource("2_tuyoq")
@@ -358,4 +359,8 @@ player = NodePath("../..")
 
 [node name="MoveState" type="Node" parent="StateMachine" unique_id=654932214 node_paths=PackedStringArray("player")]
 script = ExtResource("5_qlg0r")
+player = NodePath("../..")
+
+[node name="AttackState" type="Node" parent="StateMachine" unique_id=1748214379 node_paths=PackedStringArray("player")]
+script = ExtResource("9_ur7pv")
 player = NodePath("../..")
