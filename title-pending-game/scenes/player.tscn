@@ -5,15 +5,23 @@
 [ext_resource type="Script" uid="uid://ci7na7klbdv3h" path="res://src/states/state_machine.gd" id="2_g2els"]
 [ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/Stats.gd" id="2_tuyoq"]
 [ext_resource type="Script" uid="uid://cuqnpgaq3w7y7" path="res://src/states/player/idle_state.gd" id="3_qhqgy"]
+[ext_resource type="Shader" uid="uid://dny8ufvotobsu" path="res://flash.gdshader" id="3_y4r1p"]
 [ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="4_fjrip"]
 [ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_smehm"]
 [ext_resource type="Script" uid="uid://kty5y33cda7p" path="res://src/states/player/move_state.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://dl2cijdjioh5o" path="res://src/states/player/attack_state.gd" id="9_ur7pv"]
+[ext_resource type="Script" uid="uid://c8omx3f7vhle7" path="res://src/states/player/damaged_state.gd" id="11_d2wvv"]
 
 [sub_resource type="Resource" id="Resource_fjrip"]
 script = ExtResource("2_tuyoq")
 damage = 10
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2wvv"]
+resource_local_to_scene = true
+shader = ExtResource("3_y4r1p")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/hit_flash_on = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
 animations = [{
@@ -290,6 +298,43 @@ _data = {
 &"up_attack": SubResource("Animation_f1ej7")
 }
 
+[sub_resource type="Animation" id="Animation_qfm1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/hit_flash_on")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_a8ls1"]
+resource_name = "hit_flash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/hit_flash_on")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfm1y"]
+_data = {
+&"RESET": SubResource("Animation_qfm1y"),
+&"hit_flash": SubResource("Animation_a8ls1")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(119, 118)
 
@@ -299,19 +344,24 @@ radius = 83.14531
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 58.54012
 
-[node name="Player" type="CharacterBody2D" unique_id=807857446 node_paths=PackedStringArray("hurt_box") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=807857446 node_paths=PackedStringArray("state_machine", "hurt_box") groups=["Player"]]
 scale = Vector2(0.7523974, 0.7523974)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_g2els")
 stats = SubResource("Resource_fjrip")
+state_machine = NodePath("StateMachine")
 hurt_box = NodePath("HurtBox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=598172439]
+material = SubResource("ShaderMaterial_d2wvv")
 sprite_frames = SubResource("SpriteFrames_g2els")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=619613801]
 libraries/ = SubResource("AnimationLibrary_smehm")
+
+[node name="Effects" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=1152976768]
+libraries/ = SubResource("AnimationLibrary_qfm1y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1694851801]
 position = Vector2(-0.5, -1)
@@ -351,7 +401,7 @@ horizontal_alignment = 1
 
 [node name="StateMachine" type="Node" parent="." unique_id=349134493 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_g2els")
-initial_state = NodePath("IdleState")
+initial_state = NodePath("DamagedState")
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=763769217 node_paths=PackedStringArray("player")]
 script = ExtResource("3_qhqgy")
@@ -363,4 +413,9 @@ player = NodePath("../..")
 
 [node name="AttackState" type="Node" parent="StateMachine" unique_id=1748214379 node_paths=PackedStringArray("player")]
 script = ExtResource("9_ur7pv")
+player = NodePath("../..")
+
+[node name="DamagedState" type="Node" parent="StateMachine" unique_id=1463461493 node_paths=PackedStringArray("player")]
+script = ExtResource("11_d2wvv")
+hitstun_time = 0.4
 player = NodePath("../..")

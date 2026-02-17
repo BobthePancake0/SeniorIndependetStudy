@@ -11,6 +11,9 @@ var direction : Direction = Direction.RIGHT
 @export var movement_speed = 5;
 
 @onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
+@onready var effects_animation_player: AnimationPlayer = $AnimatedSprite2D/Effects
+
+@export var state_machine : StateMachine
 
 @export_category("Boxes")
 @export var hurt_box : Area2D
@@ -18,6 +21,8 @@ var collided_with : Node2D
 
 func _ready() -> void:
 	stats.health_depleted.connect(_on_health_depleted)
+	stats.damaged.connect(_on_damaged)
+	
 
 func get_movement_direction() -> Vector2:
 	return Input.get_vector("move_left", "move_right", "move_up", "move_down")	
@@ -31,12 +36,18 @@ func _input(event: InputEvent) -> void:
 		pass
 	pass
 
+func _on_damaged() -> void:
+	state_machine.current_state.Transitioned.emit(state_machine.current_state, "DamagedState")
+	effects_animation_player.play("hit_flash")
+	
+
 func _on_health_depleted() -> void:
 	print("GAMEOVER!")
 
 func _process(_delta):
-	queue_redraw()
+	queue_redraw()	## Debugging
 
+## Used for Debugging
 func _draw() -> void:
 	draw_line(Vector2.ZERO, velocity,  Color(1.0, 0.0, 0.0, 1.0), 2.0)
 	pass

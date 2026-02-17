@@ -6,6 +6,7 @@ enum Factions {
 	ENEMY
 }
 
+signal damaged
 signal health_changed(new_health : int, max_health: int)
 signal health_depleted
 
@@ -24,6 +25,7 @@ func initialize_stats() -> void:
 
 func take_damage(amount : int) -> void:
 	current_health -= amount
+	damaged.emit()
 
 func _on_health_set(value : int) -> void:
 	current_health = value

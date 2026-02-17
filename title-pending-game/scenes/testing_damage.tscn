@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://crw7c0xe0bcop" path="res://src/testing_damage.gd" id="1_q8dte"]
 [ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/Stats.gd" id="2_6pivp"]
 [ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="2_cklak"]
+[ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_046eu"]
 
 [sub_resource type="Resource" id="Resource_046eu"]
 script = ExtResource("2_6pivp")
 max_health = 20
+damage = 10
 faction = 1
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
@@ -24,9 +26,16 @@ stats = SubResource("Resource_046eu")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1673639974]
 shape = SubResource("RectangleShape2D_gadhp")
 
-[node name="hurtbox" type="Area2D" parent="." unique_id=1595534770]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1595534770]
 script = ExtResource("2_cklak")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=897451352]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=897451352]
+shape = SubResource("CircleShape2D_6pivp")
+debug_color = Color(0.87716186, 0.25250027, 0.58947295, 0.41960785)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=903068822]
+script = ExtResource("4_046eu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=755115690]
 shape = SubResource("CircleShape2D_6pivp")
 debug_color = Color(0.87716186, 0.25250027, 0.58947295, 0.41960785)

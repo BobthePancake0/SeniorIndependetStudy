@@ -7,7 +7,6 @@ extends State
 
 @export_category("Hit Stun Delay")
 @export var hitstun_time : float = 2.0
-@export var timer : Timer 
 
 @export_category("Knockback")
 @export var knockback_force : float = 10.0
@@ -17,8 +16,11 @@ var is_in_hitstun : bool
 func enter() -> void:
 	## For Debugging
 	$"../../StateDebug".text = name
+	var timer = Timer.new()
+	add_child(timer)
 	is_in_hitstun = true
-	apply_knockback(player.collided_with.global_position, knockback_force)
+	timer.timeout.connect(_on_timer_timeout.bind(timer))
+	#apply_knockback(player.collided_with.global_position, knockback_force)
 	timer.start(hitstun_time)
 	
 
@@ -45,6 +47,8 @@ func apply_knockback(attack_pos : Vector2, force : float):
 	player.move_and_slide()
 	print(player.velocity)
 
-func _on_timer_timeout() -> void:
+func _on_timer_timeout(timer : Timer) -> void:
+	print("Timer Timeouted")
 	is_in_hitstun = false
+	timer.queue_free()
 	pass # Replace with function body.
