@@ -31,12 +31,16 @@ func _input(event: InputEvent) -> void:
 func on_child_transition(state, new_state_name):
 	## Checks if not already in state
 	if state != current_state:
+		print("Already in " + state.name)
 		return
 	
-	## Checks if new state exists
+	## Checks if new state existsz
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
+		print(new_state_name + " does not exist!!!")
 		return
+	
+	print("Transitioning: " + current_state.name + " --> " + new_state_name)
 	
 	if current_state:
 		current_state.exit()
@@ -44,3 +48,5 @@ func on_child_transition(state, new_state_name):
 	new_state.enter()
 	
 	current_state = new_state
+	
+	

@@ -23,9 +23,9 @@ func initialize_stats() -> void:
 	current_health = max_health
 	
 
-func take_damage(amount : int) -> void:
+func take_damage(amount : int, damage_source : Node2D) -> void:
 	current_health -= amount
-	damaged.emit()
+	damaged.emit(damage_source.global_position)
 
 func _on_health_set(value : int) -> void:
 	current_health = value

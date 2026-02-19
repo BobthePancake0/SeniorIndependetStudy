@@ -15,5 +15,5 @@ func _ready() -> void:
 		Stats.Factions.ENEMY:
 			set_collision_layer_value(LayerNames.Physics.ENEMY_HURTBOX, true)
 			
-func receive_hit(damage : int) -> void:
-	owner_stats.take_damage(damage)
+func receive_hit(damage : int, body : Node2D) -> void:
+	owner_stats.take_damage(damage, body)

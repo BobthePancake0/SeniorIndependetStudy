@@ -10,43 +10,52 @@ extends State
 
 @export_category("Knockback")
 @export var knockback_force : float = 10.0
+var damage_source_pos : Vector2
 
 var is_in_hitstun : bool
 
 func enter() -> void:
 	## For Debugging
 	$"../../StateDebug".text = name
+	
+	## Creates the Timer for hitstun
 	var timer = Timer.new()
 	add_child(timer)
 	is_in_hitstun = true
 	timer.timeout.connect(_on_timer_timeout.bind(timer))
-	#apply_knockback(player.collided_with.global_position, knockback_force)
 	timer.start(hitstun_time)
+	#apply_knockback(player.collided_with.global_position, knockback_force)
+	
+	
 	
 
 func physics_update(_delta : float) -> void:
 	
 	if is_in_hitstun:
 		#player.velocity = player.velocity.move_toward(Vector2.ZERO, 500 * _delta)
+		player.process_knockback(damage_source_pos, knockback_force)
+		return
 		pass
 
-	if !is_in_hitstun:
+	elif !is_in_hitstun:
 		if player.get_movement_direction().length() != 0:
 			Transitioned.emit(self, "MoveState")
 			return
 		
-		if player.get_movement_direction().length() == 0:
+		#elif player.get_movement_direction().length() == 0:
+		else:
 			Transitioned.emit(self, "IdleState")
 			return
-
+	
 	pass
 
-func apply_knockback(attack_pos : Vector2, force : float):
-	var dir = (player.global_position - attack_pos).normalized()
-	player.velocity = dir * force
-	player.move_and_slide()
-	print(player.velocity)
+#func apply_knockback(attack_pos : Vector2, force : float):
+	#var dir = (player.global_position - attack_pos).normalized()
+	#player.velocity = dir * force
+	#player.move_and_slide()
+	#print(player.velocity)
 
+## When player out of hitstun, remove the timer 
 func _on_timer_timeout(timer : Timer) -> void:
 	print("Timer Timeouted")
 	is_in_hitstun = false

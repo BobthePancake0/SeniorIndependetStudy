@@ -15,6 +15,7 @@ var direction : Direction = Direction.RIGHT
 
 @export var state_machine : StateMachine
 
+
 @export_category("Boxes")
 @export var hurt_box : Area2D
 var collided_with : Node2D
@@ -26,19 +27,25 @@ func _ready() -> void:
 
 func get_movement_direction() -> Vector2:
 	return Input.get_vector("move_left", "move_right", "move_up", "move_down")	
-	
+
+func _physics_process(_delta: float) -> void:
+	#move_and_slide()
+	pass
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and not event.is_echo():
 		#var hitbox = Hitbox.new(stats, 0.5, hitbox_shape)
 		#add_child(hitbox)
-		animation_player.play(matchAttackAngle())
+		#animation_player.play(matchAttackAngle())
 		pass
 	pass
 
-func _on_damaged() -> void:
+func _on_damaged(damage_source_pos : Vector2) -> void:
 	state_machine.current_state.Transitioned.emit(state_machine.current_state, "DamagedState")
+	state_machine.current_state.damage_source_pos = damage_source_pos
 	effects_animation_player.play("hit_flash")
+
+	#process_knockback(damage_source_pos)
 	
 
 func _on_health_depleted() -> void:
@@ -93,3 +100,16 @@ func matchAttackAngle() -> String:
 		_:
 			return "RESET"
 	
+	
+func process_knockback(damage_source_pos : Vector2, knockback_strength : float) -> void:
+	var knockback_direction = damage_source_pos.direction_to(self.global_position)
+	
+	var knockback = (knockback_direction * knockback_strength) * 10
+	
+	velocity = knockback
+	move_and_slide()
+	
+	print("Getting knocked back")
+	
+	
+	pass

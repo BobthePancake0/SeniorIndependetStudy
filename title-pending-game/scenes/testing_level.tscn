@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://y53lnbxdndrn" path="res://scenes/player.tscn" id="1_nbq8v"]
 [ext_resource type="PackedScene" uid="uid://byrcqbpuyh6a5" path="res://scenes/testing_block.tscn" id="2_0cpfe"]
 [ext_resource type="PackedScene" uid="uid://ddsupc5ijrbw4" path="res://scenes/testing_damage.tscn" id="3_0cpfe"]
+[ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/Stats.gd" id="4_vgpne"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_nbq8v"]
 resource_name = "block"
@@ -10,6 +11,13 @@ scenes/1/scene = ExtResource("2_0cpfe")
 
 [sub_resource type="TileSet" id="TileSet_0cpfe"]
 sources/0 = SubResource("TileSetScenesCollectionSource_nbq8v")
+
+[sub_resource type="Resource" id="Resource_g8hky"]
+resource_local_to_scene = true
+script = ExtResource("4_vgpne")
+damage = 10
+faction = 1
+metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
 [node name="Node2D" type="Node2D" unique_id=625689370]
 
@@ -23,3 +31,4 @@ tile_set = SubResource("TileSet_0cpfe")
 [node name="EnemyTester" parent="." unique_id=332754568 instance=ExtResource("3_0cpfe")]
 position = Vector2(798, 262)
 scale = Vector2(5.636349, 5.636349)
+stats = SubResource("Resource_g8hky")

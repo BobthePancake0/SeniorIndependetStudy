@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://kty5y33cda7p" path="res://src/states/player/move_state.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://dl2cijdjioh5o" path="res://src/states/player/attack_state.gd" id="9_ur7pv"]
 [ext_resource type="Script" uid="uid://c8omx3f7vhle7" path="res://src/states/player/damaged_state.gd" id="11_d2wvv"]
-[ext_resource type="Script" uid="uid://eflve3uq3p34" path="res://src/states/player/roll_state.gd" id="12_3v2ag"]
 
 [sub_resource type="Resource" id="Resource_fjrip"]
 script = ExtResource("2_tuyoq")
@@ -60,18 +59,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../HurtBox:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ur7pv"]
@@ -270,22 +257,6 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_fulsm"]
-resource_name = "roll"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../HurtBox:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.46666667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.25, 0.25), Vector2(0.25, 0.25), Vector2(1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_f1ej7"]
 resource_name = "up_attack"
 length = 0.5
@@ -324,7 +295,6 @@ _data = {
 &"down_attack": SubResource("Animation_d2wvv"),
 &"horizontal_l_attack": SubResource("Animation_oprun"),
 &"horizontal_r_attack": SubResource("Animation_fjrip"),
-&"roll": SubResource("Animation_fulsm"),
 &"up_attack": SubResource("Animation_f1ej7")
 }
 
@@ -431,7 +401,7 @@ horizontal_alignment = 1
 
 [node name="StateMachine" type="Node" parent="." unique_id=349134493 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_g2els")
-initial_state = NodePath("RollState")
+initial_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=763769217 node_paths=PackedStringArray("player")]
 script = ExtResource("3_qhqgy")
@@ -447,10 +417,5 @@ player = NodePath("../..")
 
 [node name="DamagedState" type="Node" parent="StateMachine" unique_id=1463461493 node_paths=PackedStringArray("player")]
 script = ExtResource("11_d2wvv")
-hitstun_time = 0.2
-knockback_force = 20.0
-player = NodePath("../..")
-
-[node name="RollState" type="Node" parent="StateMachine" unique_id=1343104937 node_paths=PackedStringArray("player")]
-script = ExtResource("12_3v2ag")
+hitstun_time = 0.4
 player = NodePath("../..")

@@ -40,7 +40,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	
 	print("Hitbox entered " + area.owner.name)	
-	area.receive_hit(attacker_stats.damage)
+	area.receive_hit(attacker_stats.damage, owner)
 	
 	pass
 	
