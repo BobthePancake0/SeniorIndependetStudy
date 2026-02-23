@@ -28,6 +28,8 @@ stats = SubResource("Resource_046eu")
 shape = SubResource("RectangleShape2D_gadhp")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1595534770]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_cklak")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=897451352]
@@ -35,6 +37,7 @@ shape = SubResource("CircleShape2D_6pivp")
 debug_color = Color(0.87716186, 0.25250027, 0.58947295, 0.41960785)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=903068822]
+collision_layer = 0
 script = ExtResource("4_046eu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=755115690]

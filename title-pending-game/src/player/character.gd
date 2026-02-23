@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 enum Direction {NULL, RIGHT, D_RIGHT, DOWN, D_LEFT, LEFT, U_LEFT, UP, U_RIGHT}
 var direction : Direction = Direction.RIGHT
+var direction_vector : Vector2 = Vector2(1,0)
 
 @export var stats : Stats
 #@export var hitbox_shape : Shape2D

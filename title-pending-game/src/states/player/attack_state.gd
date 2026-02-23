@@ -18,6 +18,7 @@ func enter() -> void:
 
 func update(_delta : float) -> void:
 	await player.animation_player.animation_finished
+	
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down"):
 		Transitioned.emit(self, "MoveState")
 	else:
