@@ -33,12 +33,8 @@ func _physics_process(_delta: float) -> void:
 	#move_and_slide()
 	pass
 	
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack") and not event.is_echo():
-		#var hitbox = Hitbox.new(stats, 0.5, hitbox_shape)
-		#add_child(hitbox)
-		#animation_player.play(matchAttackAngle())
-		pass
+func _input(_event: InputEvent) -> void:
+	
 	pass
 
 func _on_damaged(damage_source_pos : Vector2) -> void:

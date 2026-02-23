@@ -8,6 +8,7 @@ func enter() -> void:
 	$"../../StateDebug".text = name
 
 func physics_update(_delta : float) -> void:
+	super(_delta)
 	move_player()
 	
 	## If no movement, swap to idle state
