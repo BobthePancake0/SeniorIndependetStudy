@@ -4,6 +4,9 @@ extends Node
 var _is_paused : bool = false
 
 
+func _init() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Pause"):
 		_is_paused = !_is_paused

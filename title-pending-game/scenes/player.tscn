@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bfyohjlc432ba" path="res://icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bx4ekhvrqqqxd" path="res://src/player/character.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://ci7na7klbdv3h" path="res://src/states/state_machine.gd" id="2_g2els"]
-[ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/Stats.gd" id="2_tuyoq"]
+[ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/resources/Stats.gd" id="2_tuyoq"]
+[ext_resource type="Script" uid="uid://0x41mxp558l" path="res://src/resources/Inventory.gd" id="3_jej6c"]
 [ext_resource type="Script" uid="uid://cuqnpgaq3w7y7" path="res://src/states/player/idle_state.gd" id="3_qhqgy"]
 [ext_resource type="Shader" uid="uid://dny8ufvotobsu" path="res://flash.gdshader" id="3_y4r1p"]
 [ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="4_fjrip"]
@@ -14,9 +15,15 @@
 [ext_resource type="Script" uid="uid://eflve3uq3p34" path="res://src/states/player/roll_state.gd" id="12_3v2ag"]
 
 [sub_resource type="Resource" id="Resource_fjrip"]
+resource_local_to_scene = true
 script = ExtResource("2_tuyoq")
 damage = 10
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
+
+[sub_resource type="Resource" id="Resource_f1ej7"]
+resource_local_to_scene = true
+script = ExtResource("3_jej6c")
+metadata/_custom_type_script = "uid://0x41mxp558l"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2wvv"]
 resource_local_to_scene = true
@@ -380,6 +387,7 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_g2els")
 stats = SubResource("Resource_fjrip")
+inventory = SubResource("Resource_f1ej7")
 state_machine = NodePath("StateMachine")
 hurt_box = NodePath("HurtBox")
 

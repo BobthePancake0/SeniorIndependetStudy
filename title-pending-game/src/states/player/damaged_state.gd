@@ -35,7 +35,6 @@ func physics_update(_delta : float) -> void:
 		#player.velocity = player.velocity.move_toward(Vector2.ZERO, 500 * _delta)
 		player.process_knockback(damage_source_pos, knockback_force)
 		return
-		pass
 
 	elif !is_in_hitstun:
 		if player.get_movement_direction().length() != 0:

@@ -14,7 +14,7 @@ signal health_depleted
 @export var damage : int = 1
 @export var faction : Factions = Factions.PLAYER
 
-var current_health : int : set = _on_health_set
+@export var current_health : int : set = _on_health_set
 
 func _init() -> void:
 	initialize_stats.call_deferred()

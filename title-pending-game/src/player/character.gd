@@ -6,6 +6,7 @@ var direction : Direction = Direction.RIGHT
 var direction_vector : Vector2 = Vector2(1,0)
 
 @export var stats : Stats
+@export var inventory : Inventory
 #@export var hitbox_shape : Shape2D
 
 @export_category("details")

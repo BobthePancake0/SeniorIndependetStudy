@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ddsupc5ijrbw4"]
 
 [ext_resource type="Script" uid="uid://crw7c0xe0bcop" path="res://src/testing_damage.gd" id="1_q8dte"]
-[ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/Stats.gd" id="2_6pivp"]
+[ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/resources/Stats.gd" id="2_6pivp"]
 [ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="2_cklak"]
 [ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_046eu"]
 
