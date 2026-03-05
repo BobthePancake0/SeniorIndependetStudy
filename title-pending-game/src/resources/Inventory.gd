@@ -21,8 +21,11 @@ func _init() -> void:
 	default_inventories.call_deferred()
 	pass
 
-
-
+### SETS the DEFAUTLS for the INVENTORIES on INITIALIZATION
+## 
+## Rezieses each of the inventories to their max size (10)
+## 		These inventory sizes should Never Change
+## Places an empty InventorySlot object into each inventory
 func default_inventories() -> void:
 	print("Hitting Default Inventories!")
 	key_inventory.resize(MAX_KEY_SIZE)
@@ -35,30 +38,31 @@ func default_inventories() -> void:
 	for i in MAX_CONS_SIZE:
 		consumable_inventory[i] = InventorySlot.new()
 	
-	money = 10
-	
-	
-	test_add_to_inventory()
+	test_inventory()
 	
 
 
 
-## Checks what type of item it is to determine which inventory to add to
-## Checks if the item is stackable or not
-## Goes through each inventory slot for the next empty one
-
-### CURRENTLY NEEDS TO:
-## Check if the item is stackable
-## If it is, then it adds to the first slot with the same item as it
-## If there is no slot with the same item, then adds item to the first empty slot
-## If there is no available empty slot, exits processing
+### ADDS an ITEM to an INVENTORY
+##
+## Checks what type the item is
+## Matches the item type to a specific inventory type
+##
+## Declares a refactored function to add item to type matched inventory
+##
+## PARAMS:
+## item -> Item
+##		The item being added to an inventory
+## _amount -> int (optional)
+##		The amount of the item being added to an inventory
+## 		Defaults to 0 if not passed through
 func add_to_inventory(item : Item, _amount : int = 0) -> void:
 	var slot_type = Item.Types.keys()[item.item_type].to_pascal_case()
 	print("------------")
 	print(slot_type)
 	match slot_type:
 		"Key":
-			_item_to_inventory(item, weapon_inventory, _amount)
+			_item_to_inventory(item, key_inventory, _amount)
 		"Weapon":
 			_item_to_inventory(item, weapon_inventory, _amount)
 		"Consumable":
@@ -67,16 +71,39 @@ func add_to_inventory(item : Item, _amount : int = 0) -> void:
 			print("Item is not of an exitsing type.\nExiting Adding to Inventory!")
 	pass
 
-## Adds the item to the specified inventory
-## inventory parameter is one of the three
-## inventory vararibles declared above
+### ADDS an ITEM to a specified INVENTORY
+##
+## A Refactored function to clean copied code
+##
+## CONDITIONALS:
+## If the item is considered stackable
+## 		Goes through each of the slots in an inventory
+##		Checks for if an item exists
+##			Adds to the quantity of the existing item in slot
+##			Exits full function processing
+## Else, the item may still be stackable but is not already in the inventory
+##		Goes through each of the slots in an inventory
+##		If the slot is empty, it does not already contain an item
+##			Adds a new item to the slot
+##			Exits full function processing
+##
+## If the function reaches the end, the Inventory is Full
+##
+## PARAMS:
+## item -> Item
+##		The item being added to the inventory
+## inventory -> / (typeless)
+##		The inventory being searched and added to
+## _amount -> int (optional)
+##		The amount of the item being added to an inventory
+## 		Defaults to 0 if not passed through
 func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 	if (item.is_stackable):
 		for slot : InventorySlot in inventory:
 			if slot.item == item:
 				slot.add_item_quantity(_amount)
 				return
-		print("There is no slot with " + item.item_name + "yet.\nChecking for next available slot!")
+		print("There is no slot with " + item.item_name + " yet.\nChecking for next available slot!")
 			
 	for slot : InventorySlot in inventory:
 		if slot.is_slot_empty:
@@ -86,23 +113,77 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 	print("Inventory Full.\nExiting Adding to Inventory!")
 	return
 
-func test_add_to_inventory() -> void:
+
+### REMOVES an ITEM from an INVENTORY
+## 
+## Checks what type the item is
+## Matches the item type to a specific inventory type
+## Declares a refactored function to add item to type matched inventory
+##
+## PARAMS:
+## item -> Item
+##		The item being removed from an inventory
+## _amount -> int (optional)
+##		The amount of the item being removed from an inventory
+##		Defaults to 0 if not passed through
+func remove_from_inventory(item : Item, _amount : int = 0) -> void:
+	var slot_type = Item.Types.keys()[item.item_type].to_pascal_case()
+	print("------------")
+	print(slot_type)
+	match slot_type:
+		"Key":
+			item_from_inventory(item, key_inventory, _amount)
+		"Weapon":
+			item_from_inventory(item, weapon_inventory, _amount)
+		"Consumable":
+			item_from_inventory(item, consumable_inventory, _amount)
+		_:
+			print("Item is not of an exitsing type.\nExiting Adding to Inventory!")
+	pass
+
+### REMOVES an ITEM from a specified INVENTORY
+##
+## A Refactored function to clean copied code
+##
+## CONDITIONALS:
+## Goes through each slot of an inventory
+##
+## If the slot contains an item AND the parameterized item matches the item in a slot
+## 		removes an amount from the inventory
+##		could remove the item entirely
+##
+## PARAMS:
+## item -> Item
+##		The item being removed from the inventory
+## inventory -> / (typeless)
+##		The inventory being searched and removed from
+## amount -> int 
+##		The amount of the item being removed from an inventory
+## 		will be 0 if not passed through from the parent function
+func item_from_inventory(item : Item, inventory, amount : int):
+	for slot : InventorySlot in inventory:
+		if !slot.is_slot_empty:
+			if slot.item == item:
+				slot.remove_item(amount)
+				return
+		
+	print(item.item_name + " not within the Inventory!\nExiting Adding to Inventory!")
+	return
+
+func test_inventory() -> void:
 	var item = Item.new("Tester")
 	add_to_inventory(item)
 	var item2 = Item.new("Testing")
 	add_to_inventory(item2)
-	var item3 = Item.new("Testing", Sprite2D.new(), Item.Types.KEY, true)
+	var item3 = Item.new("KeyTesting", Sprite2D.new(), Item.Types.KEY, true)
 	add_to_inventory(item3)
 	
 	var item4 = item3
 	add_to_inventory(item3)
 	add_to_inventory(item4, 5)
-
-
-## Looks at the item type to determine what inventory should be analyzed
-## Looks at each inventory for their size amount
-## If the item is found, removes it from specified inventory
-## If the item is not found, returns false or whatever
-func remove_from_inventory(item : Item, _amount : int = 0) -> void:
-	pass
 	
+	remove_from_inventory(item)
+	remove_from_inventory(item)
+	remove_from_inventory(item2)
+	remove_from_inventory(item3, 5)
+	remove_from_inventory(item3, 5)
