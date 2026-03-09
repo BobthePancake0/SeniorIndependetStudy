@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ConsumableTest" format=3 uid="uid://cu3l6l6hxnsxa"]
+
+[ext_resource type="Script" uid="uid://cgkl1541ld40b" path="res://src/items/consumable/consumable_test.gd" id="1_v6hoo"]
+
+[resource]
+script = ExtResource("1_v6hoo")
+item_name = "Cons Test"
+is_stackable = true

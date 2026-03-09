@@ -39,9 +39,54 @@ func default_inventories() -> void:
 		consumable_inventory[i] = InventorySlot.new()
 	
 	test_inventory()
+
+
+### MATCHES the ITEM to it's defined SUB-CLASS
+##		**changed to now use if statements**
+## 
+## Checks if an item falls into 1 of 3 categories
+##		A Key Item
+##		A Weapon
+##		A Consumable
+##
+## PARAMS: 
+## item -> Item
+##		The item being added to an inventory
+##
+## RETURNS -> String
+##		Representations of an items described type
+func match_item_type(item : Item) -> String:
+	if item is ItemWeapon:
+		return "Weapon"
+	elif item is ItemKey:
+		return "Key"
+	elif item is ItemConsumable:
+		return "Consumable"
+	else:
+		return ""
+
+### CHECKS if an ITEM is already within an INVENTORY
+##
+## CONDITIONALS:
+## Loops through a given inventory
+## 		Returns true if the item is found within 
+## Returns false the entire inventory is looped through 
+## 	and the item is never found
+##
+## PARAMS:
+## item -> Item
+##		The item being checked for
+## inventory -> / (typeless)
+##		The inventory being scanned for contained item
+##
+## RETURNS -> bool
+##		T/F representation of the item being found
+func check_item_exists(item : Item, inventory) -> bool:
+	for slot : InventorySlot in inventory:
+		if slot.item == item:
+			return true
 	
-
-
+	return false
 
 ### ADDS an ITEM to an INVENTORY
 ##
@@ -57,7 +102,7 @@ func default_inventories() -> void:
 ##		The amount of the item being added to an inventory
 ## 		Defaults to 0 if not passed through
 func add_to_inventory(item : Item, _amount : int = 0) -> void:
-	var slot_type = Item.Types.keys()[item.item_type].to_pascal_case()
+	var slot_type : String = match_item_type(item)
 	print("------------")
 	print(slot_type)
 	match slot_type:
@@ -69,7 +114,6 @@ func add_to_inventory(item : Item, _amount : int = 0) -> void:
 			_item_to_inventory(item, consumable_inventory, _amount)
 		_:
 			print("Item is not of an exitsing type.\nExiting Adding to Inventory!")
-	pass
 
 ### ADDS an ITEM to a specified INVENTORY
 ##
@@ -82,8 +126,10 @@ func add_to_inventory(item : Item, _amount : int = 0) -> void:
 ##			Adds to the quantity of the existing item in slot
 ##			Exits full function processing
 ## Else, the item may still be stackable but is not already in the inventory
+##		If the item is already in the inventory
+##			Exits function processing
 ##		Goes through each of the slots in an inventory
-##		If the slot is empty, it does not already contain an item
+##		Finds the first empty slot in inventory
 ##			Adds a new item to the slot
 ##			Exits full function processing
 ##
@@ -104,7 +150,11 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 				slot.add_item_quantity(_amount)
 				return
 		print("There is no slot with " + item.item_name + " yet.\nChecking for next available slot!")
-			
+	
+	if check_item_exists(item, inventory):
+		print(item.item_name + " already exists in Inventory!\nExiting Adding to Inventory!")
+		return
+	
 	for slot : InventorySlot in inventory:
 		if slot.is_slot_empty:
 			slot.add_item(item, _amount)
@@ -127,7 +177,7 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 ##		The amount of the item being removed from an inventory
 ##		Defaults to 0 if not passed through
 func remove_from_inventory(item : Item, _amount : int = 0) -> void:
-	var slot_type = Item.Types.keys()[item.item_type].to_pascal_case()
+	var slot_type = match_item_type(item)
 	print("------------")
 	print(slot_type)
 	match slot_type:
@@ -167,23 +217,53 @@ func item_from_inventory(item : Item, inventory, amount : int):
 				slot.remove_item(amount)
 				return
 		
-	print(item.item_name + " not within the Inventory!\nExiting Adding to Inventory!")
+	print(item.item_name + " not within the Inventory!\nExiting Remove to Inventory!")
 	return
 
 func test_inventory() -> void:
-	var item = Item.new("Tester")
-	add_to_inventory(item)
-	var item2 = Item.new("Testing")
-	add_to_inventory(item2)
-	var item3 = Item.new("KeyTesting", Sprite2D.new(), Item.Types.KEY, true)
-	add_to_inventory(item3)
+	### Old Tester Code
+	#var item = Item.new("Tester")
+	#add_to_inventory(item)
+	#var item2 = Item.new("Testing")
+	#add_to_inventory(item2)
+	#var item3 = Item.new("KeyTesting", Texture2D.new(), Item.Types.KEY, true)
+	#add_to_inventory(item3)
+	#
+	#var item4 = item3
+	#add_to_inventory(item3)
+	#add_to_inventory(item4, 5)
+	#
+	#remove_from_inventory(item)
+	#remove_from_inventory(item)
+	#remove_from_inventory(item2)
+	#remove_from_inventory(item3, 5)
+	#remove_from_inventory(item3, 5)
 	
-	var item4 = item3
-	add_to_inventory(item3)
-	add_to_inventory(item4, 5)
+	## Declares Instances of Item Resources
+	const ITEM_TEST = preload("uid://cyaaoiieh4kc5")
+	print("------------")
+	print(ITEM_TEST.item_name, " | ", ITEM_TEST.damage)
+	const KEY_TEST = preload("uid://cccka02hfgw64")
+	const CONSUMABLE_TEST = preload("uid://cu3l6l6hxnsxa")
 	
-	remove_from_inventory(item)
-	remove_from_inventory(item)
-	remove_from_inventory(item2)
-	remove_from_inventory(item3, 5)
-	remove_from_inventory(item3, 5)
+	## Tests adding to the inventory
+	add_to_inventory(ITEM_TEST)
+	add_to_inventory(ITEM_TEST)
+	add_to_inventory(KEY_TEST)
+	add_to_inventory(CONSUMABLE_TEST)
+	add_to_inventory(CONSUMABLE_TEST, 10)
+	
+	## Tests removing from the inventory
+	remove_from_inventory(CONSUMABLE_TEST)
+	remove_from_inventory(CONSUMABLE_TEST, 5)
+	remove_from_inventory(ITEM_TEST)
+	remove_from_inventory(ITEM_TEST)
+	remove_from_inventory(KEY_TEST)
+	
+	## Tests adding an item to the inventory of
+	## same resource
+	## different instantiated 
+	const CONSUMABLE_TEST2 = preload("uid://cu3l6l6hxnsxa")
+	add_to_inventory(CONSUMABLE_TEST2, 10)
+	
+	

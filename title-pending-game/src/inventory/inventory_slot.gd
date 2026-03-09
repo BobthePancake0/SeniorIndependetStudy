@@ -88,7 +88,10 @@ func remove_item(_amount : int = 0) -> void:
 			## If there is an amount, remove from the amount
 			## Only remove the full item from the inventory once quantity reaches 0 or below 
 			quantity -= _amount
-			print("Removing some " + item.item_name + "!\nThere are ", quantity, " remaining!")
+			print("Removing ", _amount, " " + item.item_name + "!\nThere are ", quantity, " remaining!")
+		elif is_slot_stackable:
+			quantity -= 1
+			print("Removing one " + item.item_name + "!\nThere are ", quantity, " remaining!")
 		else:
 			quantity = 0
 		if (quantity <= 0):

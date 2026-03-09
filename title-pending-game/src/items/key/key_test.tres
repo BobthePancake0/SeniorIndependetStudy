@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="KeyTest" format=3 uid="uid://cccka02hfgw64"]
+
+[ext_resource type="Script" uid="uid://dql77r3t3tb7i" path="res://src/items/key/key_test.gd" id="1_rnesb"]
+
+[resource]
+script = ExtResource("1_rnesb")
+item_name = "Key Test"
+is_sellable = true

@@ -1,13 +1,14 @@
 class_name Item
-extends Node
+extends Resource
 
-enum Types {WEAPON, KEY, CONSUMABLE}
-
-
+@export_category("Primary Details")
 @export var item_name : String = ""
-@export var item_sprite : Sprite2D = null
-@export var item_type : Types = Types.WEAPON
+@export var item_sprite : Texture2D = null
+@export var price : int = 0
+
+@export_category("misc")
 @export var is_stackable : bool = false
+@export var is_sellable : bool = false
 
 ### Initializes an item with parameters when calling Item.new()...
 ##
@@ -20,8 +21,7 @@ enum Types {WEAPON, KEY, CONSUMABLE}
 ##		sets the type of the item
 ## stackable -> bool
 ##		sets the stackability of the item
-func _init(initial_name : String = "", sprite : Sprite2D = Sprite2D.new(), type : Types = Types.WEAPON, stackable: bool = false) -> void:
-	item_name = initial_name
-	item_sprite = sprite
-	item_type = type
-	is_stackable = stackable
+#func _init(initial_name : String = "", sprite : Texture2D = Texture2D.new(), stackable: bool = false) -> void:
+	#item_name = initial_name
+	#item_sprite = sprite
+	#is_stackable = stackable
