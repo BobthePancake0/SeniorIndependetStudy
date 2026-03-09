@@ -1,40 +1,57 @@
 class_name AttackState
 extends State
 
-## More or less a current testing state to see how this would perform.
+### ATTACK STATE
 ##
-## When the state is entered, plays the attack animation corresponding to the direction
-## the player is facing
+## The state containing the attack logic for the player. 
+## 
+## When entered:
+##		Plays the correct attack animation depending on the players direction
 ##
-## When the animation is finished, go back to either idle to move state
+## Cannot EXIT this stats until the animation has finished playing
+##
+## EXITS into ->
+##		Move State on input
+## 		Idle on Nothing Else
 
 func enter() -> void:
-	## For Debugging
-	$"../../StateDebug".text = name
-	player.animation_player.play(player.matchAttackAngle())
+	
+	$"../../StateDebug".text = name		## For Debugging
+	player.animation_player.play(matchAttackAngle(player.direction))
 	
 	
 
-
+## Will not execute until the animation player has finished!
 func update(_delta : float) -> void:
 	await player.animation_player.animation_finished
 	
-	if Input.get_vector("move_left", "move_right", "move_up", "move_down"):
+	#if Input.get_vector("move_left", "move_right", "move_up", "move_down"):
+	if player.get_movement_direction():
 		Transitioned.emit(self, "MoveState")
 	else:
 		Transitioned.emit(self, "IdleState")
 	pass
 
-func physics_update(_delta : float) -> void:
 
-
-	pass
-
-func handle_input(_event : InputEvent) -> void:
-	
-	#if (_event.is_action("move_left") || _event.is_action("move_right") || _event.is_action("move_up") || _event.is_action("move_down")) and _event.is_echo():
-		#Transitioned.emit(self, "MoveState")
-	#else:
-		#Transitioned.emit(self, "IdleState")
-
-	pass
+## Returns the correct animation name
+## based on the players current facing direction
+func matchAttackAngle(direction : Globals.Directions) -> String:
+	match direction:
+		Globals.Directions.RIGHT:
+			return "horizontal_r_attack"
+		Globals.Directions.LEFT:
+			return "horizontal_l_attack"
+		Globals.Directions.UP:
+			return "up_attack"
+		Globals.Directions.DOWN:
+			return "down_attack"
+		Globals.Directions.D_RIGHT:
+			return "diagonal_dr_attack"
+		Globals.Directions.D_LEFT:
+			return "diagonal_dl_attack"
+		Globals.Directions.U_LEFT:
+			return "diagonal_ul_attack"
+		Globals.Directions.U_RIGHT:
+			return "diagonal_ur_attack"
+		_:
+			return "RESET"

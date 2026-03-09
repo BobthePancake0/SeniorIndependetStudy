@@ -1,11 +1,14 @@
 class_name State
 extends Node
 
-#signal state_finished(next_state_name : String)
+### Base Class for ALL States
+##
+## Contains mutable functions which each state can 
+## edit to their own specifics
 
 signal Transitioned
 
-@export var player : Character
+@export var player : Player		## Reference to the Player Character
 
 func enter() -> void:
 	pass

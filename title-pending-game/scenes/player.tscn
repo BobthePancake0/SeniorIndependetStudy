@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://y53lnbxdndrn"]
 
 [ext_resource type="Texture2D" uid="uid://bfyohjlc432ba" path="res://icon.svg" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://bx4ekhvrqqqxd" path="res://src/player/character.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://bx4ekhvrqqqxd" path="res://src/player/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://ci7na7klbdv3h" path="res://src/states/state_machine.gd" id="2_g2els"]
 [ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/resources/Stats.gd" id="2_tuyoq"]
 [ext_resource type="Script" uid="uid://0x41mxp558l" path="res://src/resources/inventory.gd" id="3_jej6c"]
@@ -430,10 +430,10 @@ shape = SubResource("CircleShape2D_tuyoq")
 debug_color = Color(0.82238716, 0.25499472, 0.7718542, 0.41960785)
 
 [node name="StateDebug" type="Label" parent="." unique_id=171989389]
-offset_left = -61.137905
-offset_top = -116.959465
-offset_right = 62.46699
-offset_bottom = -74.959465
+offset_left = -61.138
+offset_top = -147.564
+offset_right = 62.466896
+offset_bottom = -105.563995
 theme_override_font_sizes/font_size = 30
 text = "asdasd"
 horizontal_alignment = 1

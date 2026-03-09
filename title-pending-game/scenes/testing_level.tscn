@@ -1,9 +1,22 @@
 [gd_scene format=3 uid="uid://bxaiycxbykxvd"]
 
+[ext_resource type="Script" uid="uid://bwhv630rbicpg" path="res://src/testing_level.gd" id="1_0j4l2"]
 [ext_resource type="PackedScene" uid="uid://y53lnbxdndrn" path="res://scenes/player.tscn" id="1_nbq8v"]
 [ext_resource type="PackedScene" uid="uid://byrcqbpuyh6a5" path="res://scenes/testing_block.tscn" id="2_0cpfe"]
 [ext_resource type="PackedScene" uid="uid://ddsupc5ijrbw4" path="res://scenes/testing_damage.tscn" id="3_0cpfe"]
+[ext_resource type="Script" uid="uid://0x41mxp558l" path="res://src/resources/inventory.gd" id="4_qf8as"]
 [ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/resources/Stats.gd" id="4_vgpne"]
+
+[sub_resource type="Resource" id="Resource_mk7b3"]
+resource_local_to_scene = true
+script = ExtResource("4_vgpne")
+damage = 10
+metadata/_custom_type_script = "uid://bwjii5s8pyua2"
+
+[sub_resource type="Resource" id="Resource_4o3qb"]
+resource_local_to_scene = true
+script = ExtResource("4_qf8as")
+metadata/_custom_type_script = "uid://0x41mxp558l"
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_nbq8v"]
 resource_name = "block"
@@ -12,18 +25,24 @@ scenes/1/scene = ExtResource("2_0cpfe")
 [sub_resource type="TileSet" id="TileSet_0cpfe"]
 sources/0 = SubResource("TileSetScenesCollectionSource_nbq8v")
 
-[sub_resource type="Resource" id="Resource_vgpne"]
+[sub_resource type="Resource" id="Resource_8trvs"]
 resource_local_to_scene = true
 script = ExtResource("4_vgpne")
 damage = 10
 faction = 1
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24k53"]
+size = Vector2(148, 138)
+
 [node name="Node2D" type="Node2D" unique_id=625689370]
+script = ExtResource("1_0j4l2")
 
 [node name="CharacterBody2D" parent="." unique_id=807857446 instance=ExtResource("1_nbq8v")]
 position = Vector2(102, 93)
 collision_mask = 3
+stats = SubResource("Resource_mk7b3")
+inventory = SubResource("Resource_4o3qb")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1912685687]
 tile_set = SubResource("TileSet_0cpfe")
@@ -31,4 +50,21 @@ tile_set = SubResource("TileSet_0cpfe")
 [node name="EnemyTester" parent="." unique_id=332754568 instance=ExtResource("3_0cpfe")]
 position = Vector2(798, 262)
 scale = Vector2(5.636349, 5.636349)
-stats = SubResource("Resource_vgpne")
+stats = SubResource("Resource_8trvs")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=835470885]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1565001597]
+position = Vector2(420, 391)
+shape = SubResource("RectangleShape2D_24k53")
+debug_color = Color(0.24347755, 0.5776359, 0.2577506, 0.41960785)
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=1408191656]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=474881016]
+position = Vector2(705, 487)
+shape = SubResource("RectangleShape2D_24k53")
+debug_color = Color(0.87931496, 1.540184e-06, 0.5139735, 0.41960785)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Area2D2" to="." method="_on_area_2d_2_area_entered"]

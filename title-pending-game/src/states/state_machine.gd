@@ -1,6 +1,13 @@
 class_name StateMachine
 extends Node
 
+### The State Machine which holds all the states
+##  and runs their processes
+##
+## Connects each states transition signal to a function
+## which will swap one state to the next
+
+
 @export var initial_state : State
 
 var current_state : State
@@ -17,22 +24,18 @@ func _ready() -> void:
 		current_state = initial_state
 
 func _process(delta: float) -> void:
-	#if !GameManager.get_is_paused(): 
 	if current_state:
 		current_state.update(delta)
 
 func _physics_process(delta: float) -> void:
-	#if !GameManager.get_is_paused():
 	if current_state:
 		current_state.physics_update(delta)
 
 func _input(event: InputEvent) -> void:
-	#if !GameManager.get_is_paused():
 	if current_state:
 		current_state.handle_input(event)
 	
 func on_child_transition(state, new_state_name):
-	#if !GameManager.get_is_paused():
 	## Checks if not already in state
 	if state != current_state:
 		print("Already in " + state.name)

@@ -1,9 +1,21 @@
 class_name DamagedState
 extends State
 
-## Player enters the state whenever they recieve damage.
-## They are knocked back and are unable to deliver inputs for a couple of frames. 
-## It will then deliever immediately back into the Idle State if no input is given.
+### DAMAGED STATE
+## 
+## This state contains the logic for when the player is damaged. 
+## 
+##	This State is FORCED and Cancels other States
+##	Find this in the PLAYER script
+##
+## When Entered:
+## 		They are knocked back for a set amount of time
+##		They cannot move while in this state
+##		Only once the timer ends can they exit into other states
+##
+## EXITS into ->
+##		Move State on input
+## 		Idle on Nothing Else
 
 @export_category("Hit Stun Delay")
 @export var hitstun_time : float = 2.0
@@ -28,31 +40,47 @@ func enter() -> void:
 	
 	
 	
-
+## While the player remains in hitstun
+## Continue to process knockback
+## 
+## When they exit from hitstun
+## Process the exit state transition conditionals
 func physics_update(_delta : float) -> void:
 	
 	if is_in_hitstun:
 		#player.velocity = player.velocity.move_toward(Vector2.ZERO, 500 * _delta)
-		player.process_knockback(damage_source_pos, knockback_force)
+		process_knockback(knockback_force)
 		return
 
 	elif !is_in_hitstun:
-		if player.get_movement_direction().length() != 0:
+		if player.get_movement_direction():
 			Transitioned.emit(self, "MoveState")
 			return
-		
-		#elif player.get_movement_direction().length() == 0:
 		else:
 			Transitioned.emit(self, "IdleState")
 			return
 	
 	pass
 
-#func apply_knockback(attack_pos : Vector2, force : float):
-	#var dir = (player.global_position - attack_pos).normalized()
-	#player.velocity = dir * force
-	#player.move_and_slide()
-	#print(player.velocity)
+## Calculates the direction of the knockback based off of
+##		Where the hit took place
+##		The location of the player 
+##		The direction the player is facing
+##
+## Sets the player velocity to that knockback
+func process_knockback(knockback_strength : float) -> void:
+	var knockback_direction = damage_source_pos.direction_to(player.global_position)
+	
+	var knockback = (knockback_direction * knockback_strength) * 10
+	
+	player.velocity = knockback
+	player.move_and_slide()
+	
+	print("Getting knocked back")
+	
+	
+	pass
+
 
 ## When player out of hitstun, remove the timer 
 func _on_timer_timeout(timer : Timer) -> void:

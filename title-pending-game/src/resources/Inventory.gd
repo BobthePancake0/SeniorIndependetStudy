@@ -17,6 +17,9 @@ const MAX_CONS_SIZE = 10
 @export var money : int = 0
 
 
+signal item_added
+signal item_removed
+
 func _init() -> void:
 	default_inventories.call_deferred()
 	pass
@@ -38,7 +41,7 @@ func default_inventories() -> void:
 	for i in MAX_CONS_SIZE:
 		consumable_inventory[i] = InventorySlot.new()
 	
-	test_inventory()
+	#test_inventory()
 
 
 ### MATCHES the ITEM to it's defined SUB-CLASS
@@ -148,6 +151,7 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 		for slot : InventorySlot in inventory:
 			if slot.item == item:
 				slot.add_item_quantity(_amount)
+				item_added.emit()
 				return
 		print("There is no slot with " + item.item_name + " yet.\nChecking for next available slot!")
 	
@@ -158,6 +162,7 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 	for slot : InventorySlot in inventory:
 		if slot.is_slot_empty:
 			slot.add_item(item, _amount)
+			item_added.emit()
 			return
 				
 	print("Inventory Full.\nExiting Adding to Inventory!")
@@ -215,6 +220,7 @@ func item_from_inventory(item : Item, inventory, amount : int):
 		if !slot.is_slot_empty:
 			if slot.item == item:
 				slot.remove_item(amount)
+				item_removed.emit()
 				return
 		
 	print(item.item_name + " not within the Inventory!\nExiting Remove to Inventory!")
