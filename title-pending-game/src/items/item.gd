@@ -4,7 +4,8 @@ extends Resource
 @export_category("Primary Details")
 @export var item_name : String = ""
 @export var item_sprite : Texture2D = null
-@export var price : int = 0
+@export var price : int = 10
+@export var max_quantity : int = 1
 
 @export_category("misc")
 @export var is_stackable : bool = false

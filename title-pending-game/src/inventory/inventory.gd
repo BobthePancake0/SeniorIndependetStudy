@@ -60,7 +60,7 @@ func default_inventories() -> void:
 	for i in MAX_CONS_SIZE:
 		consumable_inventory[i] = InventorySlot.new()
 	
-	#test_inventory()
+	test_inventory()
 
 
 ### MATCHES the ITEM to it's defined SUB-CLASS
@@ -275,7 +275,7 @@ func test_inventory() -> void:
 	add_to_inventory(ITEM_TEST)
 	add_to_inventory(ITEM_TEST)
 	add_to_inventory(KEY_TEST)
-	add_to_inventory(CONSUMABLE_TEST)
+	add_to_inventory(CONSUMABLE_TEST, 10)
 	add_to_inventory(CONSUMABLE_TEST, 10)
 	
 	## Tests removing from the inventory
@@ -289,6 +289,6 @@ func test_inventory() -> void:
 	## same resource
 	## different instantiated 
 	const CONSUMABLE_TEST2 = preload("uid://cu3l6l6hxnsxa")
-	add_to_inventory(CONSUMABLE_TEST2, 10)
+	add_to_inventory(CONSUMABLE_TEST2, 50)
 	
 	

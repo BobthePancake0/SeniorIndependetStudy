@@ -42,9 +42,14 @@ func on_child_transition(state, new_state_name):
 		return
 	
 	## Checks if new state existsz
-	var new_state = states.get(new_state_name.to_lower())
+	var new_state  : State = states.get(new_state_name.to_lower())
 	if !new_state:
 		print(new_state_name + " does not exist!!!")
+		return
+
+	## Checks if the entry into state is allowed
+	if !new_state.can_enter():
+		print("Cannot enter " + new_state_name + "!\nLook at its file to understand why!")
 		return
 	
 	print("Transitioning: " + current_state.name + " --> " + new_state_name)

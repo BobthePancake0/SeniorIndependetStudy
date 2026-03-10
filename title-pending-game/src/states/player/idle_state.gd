@@ -29,8 +29,8 @@ func handle_input(_event : InputEvent) -> void:
 		Transitioned.emit(self, "MoveState")
 		
 	if _event.is_action_pressed("attack") and not _event.is_echo():
-		if player.has_sword:
-			Transitioned.emit(self, "AttackState")
+		#if player.has_sword:
+		Transitioned.emit(self, "AttackState")
 	
 	if _event.is_action_pressed("roll") and not _event.is_echo():
 		Transitioned.emit(self, "RollState")

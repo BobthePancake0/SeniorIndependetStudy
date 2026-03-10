@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_v6hoo")
 item_name = "Cons Test"
+max_quantity = 15
 is_stackable = true

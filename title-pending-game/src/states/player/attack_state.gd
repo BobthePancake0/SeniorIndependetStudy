@@ -14,6 +14,10 @@ extends State
 ##		Move State on input
 ## 		Idle on Nothing Else
 
+
+func can_enter() -> bool:
+	return player.has_sword
+
 func enter() -> void:
 	
 	$"../../StateDebug".text = name		## For Debugging

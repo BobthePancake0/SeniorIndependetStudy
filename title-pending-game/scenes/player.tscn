@@ -430,10 +430,10 @@ shape = SubResource("CircleShape2D_tuyoq")
 debug_color = Color(0.82238716, 0.25499472, 0.7718542, 0.41960785)
 
 [node name="StateDebug" type="Label" parent="." unique_id=171989389]
-offset_left = -61.138
-offset_top = -147.564
-offset_right = 62.466896
-offset_bottom = -105.563995
+offset_left = -61.137905
+offset_top = -115.63038
+offset_right = 62.46699
+offset_bottom = -73.63038
 theme_override_font_sizes/font_size = 30
 text = "asdasd"
 horizontal_alignment = 1

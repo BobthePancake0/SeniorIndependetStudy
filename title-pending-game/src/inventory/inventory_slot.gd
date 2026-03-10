@@ -34,17 +34,18 @@ extends Node
 ## 		The amount being added to the quantity
 ##		Defaults to 0 if not passed through
 ##		Only matters if newItem is stackable
-func add_item(newItem : Item, _amount : int = 0) -> void:
-	if _amount > 0 && newItem.is_stackable:
+func add_item(new_item : Item, _amount : int = 0) -> void:
+	if _amount > 0 && new_item.is_stackable:
 		## If the Item is stackable and requires an amount to be added into inventory
 		## Adds to the quantity
 		quantity = _amount
+		quantity = clamp(quantity, 0, new_item.max_quantity)
 		pass 
 	else:
 		## If the Item is not stackable, the quantity should always be 1
 		quantity = 1
 		
-	item = newItem
+	item = new_item
 	
 	is_slot_empty = false
 	is_slot_stackable = item.is_stackable
@@ -66,6 +67,7 @@ func add_item_quantity(_amount : int = 1) -> void:
 	if (item):
 		if _amount >= 0:
 			quantity += _amount
+			quantity = clamp(quantity, 0, item.max_quantity)
 		else:
 			print("Cannot add negative numbers to amount!\nExiting Process!")
 		print("The Slot for " + item.item_name + " now holds ", quantity)
