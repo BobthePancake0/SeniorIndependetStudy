@@ -1,6 +1,16 @@
 class_name Stats
 extends Resource
 
+### A Shared STATS RESOUCE
+##
+## Can be used by both players and enemys
+## 
+## Holds data such as:
+##		max health
+##		Damage
+##		If the user is the player or an enemy
+
+
 enum Factions {
 	PLAYER,
 	ENEMY
@@ -23,9 +33,11 @@ func initialize_stats() -> void:
 	current_health = max_health
 	
 
+## Called whenever the hurtbox of the owner collides with a hitbox
 func take_damage(amount : int, damage_source : Node2D) -> void:
 	current_health -= amount
 	damaged.emit(damage_source.global_position)
+
 
 func _on_health_set(value : int) -> void:
 	current_health = value

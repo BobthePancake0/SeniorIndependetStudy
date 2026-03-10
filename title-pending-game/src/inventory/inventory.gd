@@ -1,9 +1,25 @@
 class_name Inventory
 extends Resource
 
-## Each Inventory will need a Max Size Varibale
-## All inventories arrays will hold individual inventory slots
-## Not type calling the arrays is simply for testing purposes at the moment.
+### INVENTORY RESOURCE
+##
+## Holds data for the players general inventory of
+##		Key Items
+##		Weapons
+##		Consumables
+##
+## Each inventory will be a Constant Size
+## Each inventory holds an inventory_slot object
+##
+## Inventory also holds currency
+
+
+## Signals to be used in the player script
+## Checks for the ability to use certain items when they are added
+## to certain inventories
+signal item_added
+signal item_removed
+
 @export_category("Inventories")
 @export var key_inventory = []
 const MAX_KEY_SIZE = 10
@@ -14,11 +30,14 @@ const MAX_WEAPON_SIZE = 10
 @export var consumable_inventory = []
 const MAX_CONS_SIZE = 10
 
-@export var money : int = 0
+@export_category("Currency")
+@export var money : int = 0:
+	set(value):
+		money = value
+		clamp(money, 0, 999)
 
 
-signal item_added
-signal item_removed
+
 
 func _init() -> void:
 	default_inventories.call_deferred()

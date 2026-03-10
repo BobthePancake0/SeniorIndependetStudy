@@ -1,9 +1,22 @@
 class_name RollState
 extends State
 
+### ROLL STATE
+##
+## Logic for when the player is rolling
+##
+## When Entered:
+##		Plays the roll animation
+##		Calls the foll function
+##
+## Cannot EXIT this stats until the animation has finished playing
+##
+## EXITS into ->
+##		Move State on input
+## 		Idle on Nothing Else
+
 
 @export var roll_speed : int = 2
-
 
 func enter() -> void:
 	## For Debugging
@@ -11,9 +24,6 @@ func enter() -> void:
 	player.animation_player.play("roll")
 	perform_roll()
 	
-
-
-
 
 func update(_delta : float) -> void:
 	await player.animation_player.animation_finished
@@ -28,18 +38,20 @@ func physics_update(_delta : float) -> void:
 	pass
 
 
+## If the player is not standing still,  i.e. velocity is 0
+## roll with their current velocity
+## If they are standing still
+## make their velocity equal to their current vector direction * movement speed * roll
 func perform_roll() -> void:
-	## If the player is not standing still,  i.e. velocity is 0
-	## roll with their current velocity
-	## If they are standing still
-	## make their velocity equal to their current vector direction * movement speed * roll
+	
 	if player.velocity != Vector2.ZERO:
 		print("Rolling from Moving")
 		player.velocity *= roll_speed
 		print(player.velocity)
+		
 	else:
 		print("Rolling from Idle")
-		player.velocity = (player.direction_vector * (player.movement_speed * 50)) * roll_speed
+		player.velocity = (player.direction_vector * (player.movement_speed)) * roll_speed
 		print(player.direction_vector)
 		print(player.velocity)
 

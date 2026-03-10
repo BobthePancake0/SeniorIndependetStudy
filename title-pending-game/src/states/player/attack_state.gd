@@ -5,7 +5,7 @@ extends State
 ##
 ## The state containing the attack logic for the player. 
 ## 
-## When entered:
+## When Entered:
 ##		Plays the correct attack animation depending on the players direction
 ##
 ## Cannot EXIT this stats until the animation has finished playing

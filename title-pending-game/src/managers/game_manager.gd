@@ -1,5 +1,10 @@
 extends Node
 
+### A Global Script for Managing the Game
+##
+## Determines when to pause 
+##
+##
 
 var _is_paused : bool = false
 

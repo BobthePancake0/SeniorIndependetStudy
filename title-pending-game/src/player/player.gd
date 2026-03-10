@@ -4,10 +4,11 @@ extends CharacterBody2D
 @export_category('Resources')
 @export var stats : Stats
 @export var inventory : Inventory
-#@export var hitbox_shape : Shape2D
 
 @export_category("details")
-@export var movement_speed = 5;
+@export var movement_speed = 5:
+	get:		## Applies a general multiplier so the changed value can remain visible small and distinct
+		return movement_speed * 50 
 var direction : Globals.Directions = Globals.Directions.RIGHT
 var direction_vector : Vector2 = Vector2(1,0)
 
@@ -22,7 +23,6 @@ var direction_vector : Vector2 = Vector2(1,0)
 
 @export_category("Boxes")
 @export var hurt_box : Area2D
-##var collided_with : Node2D			## Used for knockback calculation
 
 ### Connects any Signals necessary for the player.
 func _ready() -> void:
@@ -33,10 +33,6 @@ func _ready() -> void:
 	inventory.item_removed.connect(_on_item_removed)
 	
 
-func get_movement_direction() -> Vector2:
-	return Input.get_vector("move_left", "move_right", "move_up", "move_down")	
-
-
 func _process(_delta):
 	queue_redraw()	## Debugging
 
@@ -45,6 +41,21 @@ func _draw() -> void:
 	draw_line(Vector2.ZERO, velocity,  Color(1.0, 0.0, 0.0, 1.0), 2.0)
 	pass
 
+
+
+## Returns the inputted direction based on
+## the movement vector
+##
+## move_left -> -x
+## move_right -> x
+## move_up -> -y
+## move_down -> y
+func get_movement_direction() -> Vector2:
+	return Input.get_vector("move_left", "move_right", "move_up", "move_down")	
+
+
+## Sets the players stated direction
+## Based on their vectored movement
 func setDirection(dir : Vector2) -> Globals.Directions:
 	if dir == Vector2.RIGHT: #Vector2(1, 0)
 		return Globals.Directions.RIGHT
@@ -66,10 +77,6 @@ func setDirection(dir : Vector2) -> Globals.Directions:
 	return direction
 	
 
-	
-
-	
-	
 ### SIGNAL CONNECTIONS
 
 ## Whenever the player is damaged:
@@ -81,7 +88,6 @@ func _on_damaged(damage_source_pos : Vector2) -> void:
 	state_machine.current_state.damage_source_pos = damage_source_pos
 	effects_animation_player.play("hit_flash")
 
-	#process_knockback(damage_source_pos)
 
 ## Whene the players health reaches 0
 ## Queue Gameover Sequence

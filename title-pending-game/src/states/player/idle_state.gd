@@ -1,10 +1,21 @@
 class_name IdleState
 extends State
 
-## This state is entered when the character is stationary with
-## no other effects being put on them
+### IDLE STATE
+##
+## Contains the logic for whenever the player is Idle
+##
+## Simply for when the player is not actively doing anything, contains exit points
+## for other states
+##
+## When entered:
+##		ensures the players velocity is 0
+##
+## EXITS into -> 
+##		Move state on vector input
+##		Attack state on attack input and ability gained
+##		Roll state on roll input and abaility gained
 
-## Primarily used as a base state to then go into other states
 
 func enter() -> void:
 	## For Debugging

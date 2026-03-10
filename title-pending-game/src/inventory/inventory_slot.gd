@@ -1,6 +1,14 @@
 class_name InventorySlot
 extends Node
 
+### Custome Objects for a SLOT in an INVENTORY
+## 
+## Holds data such as:
+##		The Item being stored
+##		If the item is stackable
+##		The Quantity within the slot
+##		If the slot is empty
+
 
 @export var item : Item = null
 @export var is_slot_stackable : bool = false
@@ -43,6 +51,7 @@ func add_item(newItem : Item, _amount : int = 0) -> void:
 	print(item.item_name + " Add to slot!\nSlot is no longer empty!\nSlot stackable: ", is_slot_stackable)
 	pass
 
+
 ### ADDS to the QUANTITY of an existing ITEM
 ## 
 ## CONDITIONALS:
@@ -62,6 +71,7 @@ func add_item_quantity(_amount : int = 1) -> void:
 		print("The Slot for " + item.item_name + " now holds ", quantity)
 	else:
 		print("There is no existing item. Cannot add to quantity")
+
 
 ### REMOVES from the QUANTITY of an ITEM
 ### REMOVES an ITEM from the slot
