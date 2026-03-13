@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://0x41mxp558l" path="res://src/inventory/inventory.gd" id="3_jej6c"]
 [ext_resource type="Script" uid="uid://cuqnpgaq3w7y7" path="res://src/states/player/idle_state.gd" id="3_qhqgy"]
 [ext_resource type="Shader" uid="uid://dny8ufvotobsu" path="res://flash.gdshader" id="3_y4r1p"]
+[ext_resource type="Script" uid="uid://ccpx13n8lhuv4" path="res://src/resources/Equipment.gd" id="4_f1ej7"]
 [ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="4_fjrip"]
 [ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_smehm"]
 [ext_resource type="Script" uid="uid://kty5y33cda7p" path="res://src/states/player/move_state.gd" id="5_qlg0r"]
@@ -17,13 +18,17 @@
 [sub_resource type="Resource" id="Resource_fjrip"]
 resource_local_to_scene = true
 script = ExtResource("2_tuyoq")
-damage = 10
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
 [sub_resource type="Resource" id="Resource_f1ej7"]
 resource_local_to_scene = true
 script = ExtResource("3_jej6c")
 metadata/_custom_type_script = "uid://0x41mxp558l"
+
+[sub_resource type="Resource" id="Resource_oprun"]
+resource_local_to_scene = true
+script = ExtResource("4_f1ej7")
+metadata/_custom_type_script = "uid://ccpx13n8lhuv4"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2wvv"]
 resource_local_to_scene = true
@@ -47,7 +52,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -87,7 +92,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -115,7 +120,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -143,7 +148,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -171,7 +176,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -199,7 +204,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -227,7 +232,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -255,7 +260,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -299,7 +304,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../HitBoxes/Marker2D/HitBox/CollisionShape2D:disabled")
+tracks/0/path = NodePath("../HitBoxes/Marker2D/SwordHitBox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -388,7 +393,9 @@ collision_mask = 0
 script = ExtResource("1_g2els")
 stats = SubResource("Resource_fjrip")
 inventory = SubResource("Resource_f1ej7")
+equipment = SubResource("Resource_oprun")
 state_machine = NodePath("StateMachine")
+can_roll = true
 hurt_box = NodePath("HurtBox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=598172439]
@@ -409,13 +416,13 @@ shape = SubResource("RectangleShape2D_qhqgy")
 
 [node name="Marker2D" type="Marker2D" parent="HitBoxes" unique_id=1987497555]
 
-[node name="HitBox" type="Area2D" parent="HitBoxes/Marker2D" unique_id=971331971]
+[node name="SwordHitBox" type="Area2D" parent="HitBoxes/Marker2D" unique_id=971331971]
 position = Vector2(164.80652, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_smehm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/Marker2D/HitBox" unique_id=716134850]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxes/Marker2D/SwordHitBox" unique_id=716134850]
 shape = SubResource("CircleShape2D_ur7pv")
 disabled = true
 debug_color = Color(0.87155205, 0.30202132, 0.46169508, 0.41960785)

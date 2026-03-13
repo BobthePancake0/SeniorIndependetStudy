@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="ItemTest" format=3 uid="uid://cyaaoiieh4kc5"]
+[gd_resource type="Resource" script_class="WeaponTest" format=3 uid="uid://cyaaoiieh4kc5"]
 
 [ext_resource type="Script" uid="uid://b4fm48rfgdr8f" path="res://src/items/weapon/weapon_test.gd" id="1_pilpk"]
 
 [resource]
 script = ExtResource("1_pilpk")
-original_item_variable = 5
-damage = 10
+damage = 15
 item_name = "Item Test"
 price = 100
 is_sellable = true

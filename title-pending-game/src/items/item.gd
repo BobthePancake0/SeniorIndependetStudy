@@ -10,3 +10,10 @@ extends Resource
 @export_category("misc")
 @export var is_stackable : bool = false
 @export var is_sellable : bool = false
+
+
+signal item_used(action : String)
+
+
+func use() -> void:
+	return

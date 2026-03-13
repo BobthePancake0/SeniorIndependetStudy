@@ -21,7 +21,7 @@ signal health_changed(new_health : int, max_health: int)
 signal health_depleted
 
 @export var max_health : int = 100
-@export var damage : int = 1
+#@export var damage : int = 1
 @export var faction : Factions = Factions.PLAYER
 
 @export var current_health : int : set = _on_health_set

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export_category('Resources')
 @export var stats : Stats
 @export var inventory : Inventory
+@export var equipment : Equipment
 
 @export_category("details")
 @export var movement_speed = 5:
@@ -20,6 +21,7 @@ var direction_vector : Vector2 = Vector2(1,0)
 
 @export_category("Can Do")
 @export var has_sword : bool = false
+@export var can_roll : bool = false
 
 @export_category("Boxes")
 @export var hurt_box : Area2D
@@ -31,6 +33,7 @@ func _ready() -> void:
 	
 	inventory.item_added.connect(_on_item_added)
 	inventory.item_removed.connect(_on_item_removed)
+	
 	
 
 func _process(_delta):
@@ -104,6 +107,7 @@ func _on_item_added() -> void:
 		for slot : InventorySlot in inventory.weapon_inventory:
 			if slot.item is WeaponTest:
 				has_sword = true
+				get_node("HitBoxes/Marker2D/SwordHitBox").attack_power = slot.item.damage
 				return
 	pass
 

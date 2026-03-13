@@ -6,17 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://ddsupc5ijrbw4" path="res://scenes/testing_damage.tscn" id="3_0cpfe"]
 [ext_resource type="Script" uid="uid://0x41mxp558l" path="res://src/inventory/inventory.gd" id="4_qf8as"]
 [ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/resources/Stats.gd" id="4_vgpne"]
+[ext_resource type="Script" uid="uid://ccpx13n8lhuv4" path="res://src/resources/Equipment.gd" id="5_qf8as"]
+[ext_resource type="Resource" uid="uid://cyaaoiieh4kc5" path="res://src/items/weapon/weapon_test.tres" id="6_mk7b3"]
 
-[sub_resource type="Resource" id="Resource_0j4l2"]
+[sub_resource type="Resource" id="Resource_4o3qb"]
 resource_local_to_scene = true
 script = ExtResource("4_vgpne")
-damage = 10
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
-[sub_resource type="Resource" id="Resource_qf8as"]
+[sub_resource type="Resource" id="Resource_8trvs"]
 resource_local_to_scene = true
 script = ExtResource("4_qf8as")
 metadata/_custom_type_script = "uid://0x41mxp558l"
+
+[sub_resource type="Resource" id="Resource_tttw2"]
+resource_local_to_scene = true
+script = ExtResource("5_qf8as")
+sword_slot = ExtResource("6_mk7b3")
+metadata/_custom_type_script = "uid://ccpx13n8lhuv4"
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_nbq8v"]
 resource_name = "block"
@@ -25,10 +32,9 @@ scenes/1/scene = ExtResource("2_0cpfe")
 [sub_resource type="TileSet" id="TileSet_0cpfe"]
 sources/0 = SubResource("TileSetScenesCollectionSource_nbq8v")
 
-[sub_resource type="Resource" id="Resource_mk7b3"]
+[sub_resource type="Resource" id="Resource_re7k7"]
 resource_local_to_scene = true
 script = ExtResource("4_vgpne")
-damage = 10
 faction = 1
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
@@ -41,8 +47,9 @@ script = ExtResource("1_0j4l2")
 [node name="CharacterBody2D" parent="." unique_id=807857446 instance=ExtResource("1_nbq8v")]
 position = Vector2(102, 93)
 collision_mask = 3
-stats = SubResource("Resource_0j4l2")
-inventory = SubResource("Resource_qf8as")
+stats = SubResource("Resource_4o3qb")
+inventory = SubResource("Resource_8trvs")
+equipment = SubResource("Resource_tttw2")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1912685687]
 tile_set = SubResource("TileSet_0cpfe")
@@ -50,7 +57,7 @@ tile_set = SubResource("TileSet_0cpfe")
 [node name="EnemyTester" parent="." unique_id=332754568 instance=ExtResource("3_0cpfe")]
 position = Vector2(798, 262)
 scale = Vector2(5.636349, 5.636349)
-stats = SubResource("Resource_mk7b3")
+stats = SubResource("Resource_re7k7")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=835470885]
 

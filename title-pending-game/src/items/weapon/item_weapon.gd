@@ -2,4 +2,4 @@ class_name ItemWeapon
 extends Item
 
 
-@export var damage : int
+@export var damage : int = 1

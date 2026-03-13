@@ -18,6 +18,11 @@ extends State
 
 @export var roll_speed : int = 2
 
+
+func can_enter() -> bool:
+	return player.can_roll
+
+
 func enter() -> void:
 	## For Debugging
 	$"../../StateDebug".text = name

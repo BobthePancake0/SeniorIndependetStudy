@@ -1,7 +1,7 @@
 class_name Hitbox
 extends Area2D
 
-@onready var attacker_stats : Stats = owner.stats
+@onready var attack_power : int = 2
 #var hitbox_lifetime : float
 #var shape : Shape2D
 
@@ -40,11 +40,13 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	
 	print("Hitbox entered " + area.owner.name)	
-	area.receive_hit(attacker_stats.damage, owner)
+	area.receive_hit(attack_power, owner)
 	
 	pass
 	
-	
+
+func foo() -> void:
+	pass
 	
 	
 	
