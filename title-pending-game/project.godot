@@ -22,7 +22,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://dhaakobjfklpg"
-InputManager="*uid://byxy4ddi8pb67"
 
 [global_group]
 

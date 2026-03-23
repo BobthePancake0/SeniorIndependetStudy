@@ -17,7 +17,7 @@ extends Resource
 ## Signals to be used in the player script
 ## Checks for the ability to use certain items when they are added
 ## to certain inventories
-signal item_added
+signal item_added(item : Item)
 signal item_removed
 
 @export_category("Inventories")
@@ -170,7 +170,7 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 		for slot : InventorySlot in inventory:
 			if slot.item == item:
 				slot.add_item_quantity(_amount)
-				item_added.emit()
+				#item_added.emit(item)
 				return
 		print("There is no slot with " + item.item_name + " yet.\nChecking for next available slot!")
 	
@@ -181,7 +181,7 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 	for slot : InventorySlot in inventory:
 		if slot.is_slot_empty:
 			slot.add_item(item, _amount)
-			item_added.emit()
+			item_added.emit(item)
 			return
 				
 	print("Inventory Full.\nExiting Adding to Inventory!")

@@ -30,9 +30,13 @@ func physics_update(_delta : float) -> void:
 	
 func handle_input(_event : InputEvent) -> void:
 
-	if _event.is_action_pressed("attack") and not _event.is_echo():
-		#if player.has_sword:
+
+	if player.has_sword && player.equipment.do_attack_button(_event) :
 		Transitioned.emit(self, "AttackState")
+		
+	#if _event.is_action_pressed("attack") and not _event.is_echo():
+		##if player.has_sword:
+		#Transitioned.emit(self, "AttackState")
 		
 	if _event.is_action_pressed("roll") and not _event.is_echo():
 		Transitioned.emit(self, "RollState")

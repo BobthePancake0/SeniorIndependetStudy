@@ -102,13 +102,17 @@ func _on_health_depleted() -> void:
 ##
 ## Sword Check:
 ##		If the player gets a sword added, they should now be able to attack
-func _on_item_added() -> void:
-	if (!has_sword):
-		for slot : InventorySlot in inventory.weapon_inventory:
-			if slot.item is WeaponTest:
-				has_sword = true
-				get_node("HitBoxes/Marker2D/SwordHitBox").attack_power = slot.item.damage
-				return
+func _on_item_added(item : Item) -> void:
+	#if (!has_sword):
+		#for slot : InventorySlot in inventory.weapon_inventory:
+			#if slot.item is WeaponTest:
+				#has_sword = true
+				#get_node("HitBoxes/Marker2D/SwordHitBox").attack_power = slot.item.damage
+				#return
+	if item is WeaponTest:
+		has_sword = true
+		get_node("HitBoxes/Marker2D/SwordHitBox").attack_power = item.damage
+		return
 	pass
 
 ## Whenever an Item is added to the Inventory
