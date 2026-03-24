@@ -12,10 +12,10 @@ extends Resource
 @export var is_sellable : bool = false
 
 
-var player : Player
+
 
 signal item_used(action : String)
 
 
-func use() -> void:
+func use(_player : Player = null) -> void:
 	return

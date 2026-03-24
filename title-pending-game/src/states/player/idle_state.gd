@@ -29,8 +29,8 @@ func handle_input(_event : InputEvent) -> void:
 	if (_event.is_action("move_left") || _event.is_action("move_right") || _event.is_action("move_up") || _event.is_action("move_down")) and not _event.is_echo():
 		Transitioned.emit(self, "MoveState")
 		
-	if player.has_sword && player.equipment.do_attack_button(_event) && !_event.is_echo() :
-		Transitioned.emit(self, "AttackState")
+	#if player.has_sword && player.equipment.do_attack_button(_event) && !_event.is_echo() :
+		#Transitioned.emit(self, "AttackState")
 		
 	#if player.equipment.do_button_input(_event):
 		#pass
@@ -39,7 +39,10 @@ func handle_input(_event : InputEvent) -> void:
 		##if player.has_sword:
 		#Transitioned.emit(self, "AttackState")
 	
-	if _event.is_action_pressed("roll") and not _event.is_echo():
+	elif _event.is_action_pressed("roll") and not _event.is_echo():
 		Transitioned.emit(self, "RollState")
+		
+	else:
+		player.equipment.do_button_input(_event)
 
 	pass

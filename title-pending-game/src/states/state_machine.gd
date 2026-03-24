@@ -35,7 +35,7 @@ func _input(event: InputEvent) -> void:
 	if current_state:
 		current_state.handle_input(event)
 	
-func on_child_transition(state, new_state_name):
+func on_child_transition(state : State, new_state_name):
 	## Checks if not already in state
 	if state != current_state:
 		print("Already in " + state.name)
@@ -45,6 +45,11 @@ func on_child_transition(state, new_state_name):
 	var new_state  : State = states.get(new_state_name.to_lower())
 	if !new_state:
 		print(new_state_name + " does not exist!!!")
+		return
+
+	if !state.can_transition(new_state_name):
+		print("Illegal Transition!")
+		print("Cannot transition from " + state.name + " into " + new_state_name)
 		return
 
 	## Checks if the entry into state is allowed

@@ -451,22 +451,27 @@ initial_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=763769217 node_paths=PackedStringArray("player")]
 script = ExtResource("3_qhqgy")
+transition_list = Array[String](["DamagedState", "MoveState", "RollState", "AttackState"])
 player = NodePath("../..")
 
 [node name="MoveState" type="Node" parent="StateMachine" unique_id=654932214 node_paths=PackedStringArray("player")]
 script = ExtResource("5_qlg0r")
+transition_list = Array[String](["DamagedState", "IdleState", "RollState", "AttackState"])
 player = NodePath("../..")
 
 [node name="AttackState" type="Node" parent="StateMachine" unique_id=1748214379 node_paths=PackedStringArray("player")]
 script = ExtResource("9_ur7pv")
+transition_list = Array[String](["IdleState", "MoveState"])
 player = NodePath("../..")
 
 [node name="DamagedState" type="Node" parent="StateMachine" unique_id=1463461493 node_paths=PackedStringArray("player")]
 script = ExtResource("11_d2wvv")
 hitstun_time = 0.2
 knockback_force = 20.0
+transition_list = Array[String](["IdleState", "MoveState"])
 player = NodePath("../..")
 
 [node name="RollState" type="Node" parent="StateMachine" unique_id=1343104937 node_paths=PackedStringArray("player")]
 script = ExtResource("12_3v2ag")
+transition_list = Array[String](["IdleState", "MoveState"])
 player = NodePath("../..")

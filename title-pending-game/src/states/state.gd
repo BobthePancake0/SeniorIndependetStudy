@@ -8,6 +8,8 @@ extends Node
 
 signal Transitioned
 
+@export var transition_list : Array[String] = []
+
 @export var player : Player		## Reference to the Player Character
 
 func enter() -> void:
@@ -27,5 +29,13 @@ func handle_input(_event : InputEvent) -> void:
 	
 func can_enter() -> bool:
 	return true
+	
+func can_transition(state : String) -> bool:
+	
+	for state_name in transition_list:
+		if state_name.to_lower() == state.to_lower():
+			return true
+	
+	return false
 	
 	

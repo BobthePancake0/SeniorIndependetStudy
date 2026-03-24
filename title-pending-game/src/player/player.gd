@@ -34,6 +34,9 @@ func _ready() -> void:
 	inventory.item_added.connect(_on_item_added)
 	inventory.item_removed.connect(_on_item_removed)
 	
+	if equipment:
+		equipment.player = self
+	
 	
 
 func _process(_delta):
@@ -80,6 +83,9 @@ func setDirection(dir : Vector2) -> Globals.Directions:
 	return direction
 	
 
+func force_state_transition(state_name : String) -> void:
+	state_machine.current_state.Transitioned.emit(state_machine.current_state, state_name)
+
 ### SIGNAL CONNECTIONS
 
 ## Whenever the player is damaged:
@@ -87,7 +93,8 @@ func setDirection(dir : Vector2) -> Globals.Directions:
 ## Set the position of the source of the damage (attacker / object)
 ## Play the hit_flash from the effects animation. 
 func _on_damaged(damage_source_pos : Vector2) -> void:
-	state_machine.current_state.Transitioned.emit(state_machine.current_state, "DamagedState")
+	#state_machine.current_state.Transitioned.emit(state_machine.current_state, "DamagedState")
+	force_state_transition("DamagedState")
 	state_machine.current_state.damage_source_pos = damage_source_pos
 	effects_animation_player.play("hit_flash")
 

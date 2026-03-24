@@ -23,39 +23,44 @@ extends Resource
 @export var item_3_button : String = "item_3"
 
 
+var player
+
+
 func do_attack_button(event : InputEvent) -> bool:
-	if event.is_action_pressed(sword_button):
-		if sword_slot && sword_slot.has_method("use"):
-			sword_slot.use()
-			return true
-		else:
-			print("Cannot use that item")
-			return false
+	
 			
 	return false
 			
 func do_button_input(event : InputEvent) -> bool:
-		
 	
-	if event.is_action_pressed(item_1_button):
-		if item_1_slot && item_1_slot.has_method("use"):
-			item_1_slot.use()
-			return true
-	elif event.is_action_pressed(item_2_button):
-		if item_2_slot && item_2_slot.has_method("use"):
-			item_2_slot.use()
-			return true
-	elif event.is_action_pressed(item_3_button):
-		if item_3_slot && item_3_slot.has_method("use"):
-			item_3_slot.use()
-			return true
-	
-	print("Button cannot be Pressed.")
-	print("No Item present in the slot")
-	return false
-			
+	if !event is InputEventMouseMotion and !event.is_echo() and !event.is_released():
+		if event.is_action_pressed(sword_button):
+			if sword_slot && sword_slot.has_method("use"):
+				sword_slot.use(player)
+				return true
+			else:
+				print("Cannot use that item")
+				return false
 
-	pass
+		elif event.is_action_pressed(item_1_button):
+			if item_1_slot && item_1_slot.has_method("use"):
+				item_1_slot.use()
+				return true
+		elif event.is_action_pressed(item_2_button):
+			if item_2_slot && item_2_slot.has_method("use"):
+				item_2_slot.use()
+				return true
+		elif event.is_action_pressed(item_3_button):
+			if item_3_slot && item_3_slot.has_method("use"):
+				item_3_slot.use()
+				return true
+
+		print("Button cannot be Pressed.")
+		print("No Item present in the slot")
+		return false
+	
+	return false
+
 
 #func _input(_event: InputEvent) -> void:
 #

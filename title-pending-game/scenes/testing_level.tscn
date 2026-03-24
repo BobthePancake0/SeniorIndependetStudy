@@ -11,17 +11,17 @@
 [ext_resource type="Resource" uid="uid://cccka02hfgw64" path="res://src/items/key/key_test.tres" id="6_24k53"]
 [ext_resource type="Resource" uid="uid://cyaaoiieh4kc5" path="res://src/items/weapon/weapon_test.tres" id="6_mk7b3"]
 
-[sub_resource type="Resource" id="Resource_mk7b3"]
+[sub_resource type="Resource" id="Resource_8trvs"]
 resource_local_to_scene = true
 script = ExtResource("4_vgpne")
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
-[sub_resource type="Resource" id="Resource_4o3qb"]
+[sub_resource type="Resource" id="Resource_24k53"]
 resource_local_to_scene = true
 script = ExtResource("4_qf8as")
 metadata/_custom_type_script = "uid://0x41mxp558l"
 
-[sub_resource type="Resource" id="Resource_8trvs"]
+[sub_resource type="Resource" id="Resource_tttw2"]
 resource_local_to_scene = true
 script = ExtResource("5_qf8as")
 sword_slot = ExtResource("6_mk7b3")
@@ -36,7 +36,7 @@ scenes/1/scene = ExtResource("2_0cpfe")
 [sub_resource type="TileSet" id="TileSet_0cpfe"]
 sources/0 = SubResource("TileSetScenesCollectionSource_nbq8v")
 
-[sub_resource type="Resource" id="Resource_24k53"]
+[sub_resource type="Resource" id="Resource_re7k7"]
 resource_local_to_scene = true
 script = ExtResource("4_vgpne")
 faction = 1
@@ -48,12 +48,12 @@ size = Vector2(148, 138)
 [node name="Node2D" type="Node2D" unique_id=625689370]
 script = ExtResource("1_0j4l2")
 
-[node name="CharacterBody2D" parent="." unique_id=807857446 instance=ExtResource("1_nbq8v")]
+[node name="CharacterPlayer" parent="." unique_id=807857446 instance=ExtResource("1_nbq8v")]
 position = Vector2(102, 93)
 collision_mask = 3
-stats = SubResource("Resource_mk7b3")
-inventory = SubResource("Resource_4o3qb")
-equipment = SubResource("Resource_8trvs")
+stats = SubResource("Resource_8trvs")
+inventory = SubResource("Resource_24k53")
+equipment = SubResource("Resource_tttw2")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1912685687]
 tile_set = SubResource("TileSet_0cpfe")
@@ -61,7 +61,7 @@ tile_set = SubResource("TileSet_0cpfe")
 [node name="EnemyTester" parent="." unique_id=332754568 instance=ExtResource("3_0cpfe")]
 position = Vector2(798, 262)
 scale = Vector2(5.636349, 5.636349)
-stats = SubResource("Resource_24k53")
+stats = SubResource("Resource_re7k7")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=835470885]
 
