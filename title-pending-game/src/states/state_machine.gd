@@ -47,7 +47,7 @@ func on_child_transition(state : State, new_state_name):
 		print(new_state_name + " does not exist!!!")
 		return
 
-	if !state.can_transition(new_state_name):
+	if !state.can_transition(new_state):
 		print("Illegal Transition!")
 		print("Cannot transition from " + state.name + " into " + new_state_name)
 		return
@@ -58,6 +58,7 @@ func on_child_transition(state : State, new_state_name):
 		return
 	
 	print("Transitioning: " + current_state.name + " --> " + new_state_name)
+	
 	
 	if current_state:
 		current_state.exit()

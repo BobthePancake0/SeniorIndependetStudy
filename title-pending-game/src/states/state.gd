@@ -8,7 +8,7 @@ extends Node
 
 signal Transitioned
 
-@export var transition_list : Array[String] = []
+@export var transition_list : Array[State] = []
 
 @export var player : Player		## Reference to the Player Character
 
@@ -30,10 +30,10 @@ func handle_input(_event : InputEvent) -> void:
 func can_enter() -> bool:
 	return true
 	
-func can_transition(state : String) -> bool:
+func can_transition(new_state : State) -> bool:
 	
-	for state_name in transition_list:
-		if state_name.to_lower() == state.to_lower():
+	for state in transition_list:
+		if state == new_state:
 			return true
 	
 	return false

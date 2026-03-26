@@ -60,7 +60,7 @@ func default_inventories() -> void:
 	for i in MAX_CONS_SIZE:
 		consumable_inventory[i] = InventorySlot.new()
 	
-	test_inventory()
+	#test_inventory()
 
 
 ### MATCHES the ITEM to it's defined SUB-CLASS

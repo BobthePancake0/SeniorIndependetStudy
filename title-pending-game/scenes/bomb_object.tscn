@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://cpcmlwigsnta2"]
+
+[ext_resource type="Script" uid="uid://cm06ueexnhj44" path="res://src/items/weapon/bomb_object.gd" id="1_cdrpn"]
+[ext_resource type="Texture2D" uid="uid://bfyohjlc432ba" path="res://icon.svg" id="1_t5oiu"]
+[ext_resource type="Resource" uid="uid://cdm607fvf3qkb" path="res://src/items/weapon/bomb_resource.tres" id="2_s51hb"]
+[ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_2kf3b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yi3hb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t5oiu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_cdrpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.45707953, 0.0001458843, 0.4570762, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_s51hb"]
+resource_name = "explode"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"destroy_bomb"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2kf3b"]
+resource_name = "ticking"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.45707953, 0.0001458843, 0.4570762, 1), Color(0.45707953, 0.00014591217, 0.4570762, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_02ld8"]
+_data = {
+&"RESET": SubResource("Animation_cdrpn"),
+&"explode": SubResource("Animation_s51hb"),
+&"ticking": SubResource("Animation_2kf3b")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3ct4"]
+radius = 103.38462
+
+[node name="Bomb" type="Node2D" unique_id=1623780900]
+scale = Vector2(1.8, 1.8)
+script = ExtResource("1_cdrpn")
+bomb_data = ExtResource("2_s51hb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=474343978]
+modulate = Color(0.45707953, 0.0001458843, 0.4570762, 1)
+position = Vector2(0, 5.9604645e-08)
+scale = Vector2(0.203125, 0.203125)
+sprite_frames = SubResource("SpriteFrames_yi3hb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=296451098]
+libraries/ = SubResource("AnimationLibrary_02ld8")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=910945616]
+position = Vector2(0, 5.9604645e-08)
+scale = Vector2(0.203125, 0.203125)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("4_2kf3b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=967880588]
+shape = SubResource("CircleShape2D_n3ct4")
+disabled = true
+debug_color = Color(0.9584449, 9.62615e-07, 0.52974755, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=1348905349]
+
+[connection signal="animation_finished" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

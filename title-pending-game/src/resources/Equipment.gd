@@ -44,15 +44,15 @@ func do_button_input(event : InputEvent) -> bool:
 
 		elif event.is_action_pressed(item_1_button):
 			if item_1_slot && item_1_slot.has_method("use"):
-				item_1_slot.use()
+				item_1_slot.use(player)
 				return true
 		elif event.is_action_pressed(item_2_button):
 			if item_2_slot && item_2_slot.has_method("use"):
-				item_2_slot.use()
+				item_2_slot.use(player)
 				return true
 		elif event.is_action_pressed(item_3_button):
 			if item_3_slot && item_3_slot.has_method("use"):
-				item_3_slot.use()
+				item_3_slot.use(player)
 				return true
 
 		print("Button cannot be Pressed.")

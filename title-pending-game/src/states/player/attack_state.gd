@@ -22,7 +22,10 @@ func enter() -> void:
 	
 	$"../../StateDebug".text = name		## For Debugging
 	player.animation_player.play(matchAttackAngle(player.direction))
-	
+
+
+func exit() -> void:
+	player.animation_player.stop()
 	
 
 ## Will not execute until the animation player has finished!
