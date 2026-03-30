@@ -57,7 +57,7 @@ func on_child_transition(state : State, new_state_name):
 		print("Cannot enter " + new_state_name + "!\nLook at its file to understand why!")
 		return
 	
-	print("Transitioning: " + current_state.name + " --> " + new_state_name)
+	#print("Transitioning: " + current_state.name + " --> " + new_state_name)
 	
 	
 	if current_state:

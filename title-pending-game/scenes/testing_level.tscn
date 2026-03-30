@@ -6,26 +6,22 @@
 [ext_resource type="PackedScene" uid="uid://ddsupc5ijrbw4" path="res://scenes/testing_damage.tscn" id="3_0cpfe"]
 [ext_resource type="Script" uid="uid://0x41mxp558l" path="res://src/inventory/inventory.gd" id="4_qf8as"]
 [ext_resource type="Script" uid="uid://bwjii5s8pyua2" path="res://src/resources/Stats.gd" id="4_vgpne"]
-[ext_resource type="Resource" uid="uid://cdm607fvf3qkb" path="res://src/items/weapon/bomb_resource.tres" id="5_4o3qb"]
 [ext_resource type="Script" uid="uid://ccpx13n8lhuv4" path="res://src/resources/Equipment.gd" id="5_qf8as"]
-[ext_resource type="Resource" uid="uid://cyaaoiieh4kc5" path="res://src/items/weapon/weapon_test.tres" id="6_mk7b3"]
 [ext_resource type="PackedScene" uid="uid://cpcmlwigsnta2" path="res://scenes/bomb_object.tscn" id="10_8trvs"]
 
-[sub_resource type="Resource" id="Resource_8trvs"]
+[sub_resource type="Resource" id="Resource_mk7b3"]
 resource_local_to_scene = true
 script = ExtResource("4_vgpne")
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
-[sub_resource type="Resource" id="Resource_24k53"]
+[sub_resource type="Resource" id="Resource_4o3qb"]
 resource_local_to_scene = true
 script = ExtResource("4_qf8as")
 metadata/_custom_type_script = "uid://0x41mxp558l"
 
-[sub_resource type="Resource" id="Resource_tttw2"]
+[sub_resource type="Resource" id="Resource_8trvs"]
 resource_local_to_scene = true
 script = ExtResource("5_qf8as")
-sword_slot = ExtResource("6_mk7b3")
-item_1_slot = ExtResource("5_4o3qb")
 metadata/_custom_type_script = "uid://ccpx13n8lhuv4"
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_nbq8v"]
@@ -35,14 +31,14 @@ scenes/1/scene = ExtResource("2_0cpfe")
 [sub_resource type="TileSet" id="TileSet_0cpfe"]
 sources/0 = SubResource("TileSetScenesCollectionSource_nbq8v")
 
-[sub_resource type="Resource" id="Resource_re7k7"]
+[sub_resource type="Resource" id="Resource_24k53"]
 resource_local_to_scene = true
 script = ExtResource("4_vgpne")
 faction = 1
 metadata/_custom_type_script = "uid://bwjii5s8pyua2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24k53"]
-size = Vector2(148, 138)
+size = Vector2(65, 62)
 
 [node name="Node2D" type="Node2D" unique_id=625689370]
 script = ExtResource("1_0j4l2")
@@ -50,9 +46,9 @@ script = ExtResource("1_0j4l2")
 [node name="CharacterPlayer" parent="." unique_id=807857446 instance=ExtResource("1_nbq8v")]
 position = Vector2(102, 93)
 collision_mask = 3
-stats = SubResource("Resource_8trvs")
-inventory = SubResource("Resource_24k53")
-equipment = SubResource("Resource_tttw2")
+stats = SubResource("Resource_mk7b3")
+inventory = SubResource("Resource_4o3qb")
+equipment = SubResource("Resource_8trvs")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1912685687]
 tile_set = SubResource("TileSet_0cpfe")
@@ -60,19 +56,19 @@ tile_set = SubResource("TileSet_0cpfe")
 [node name="EnemyTester" parent="." unique_id=332754568 instance=ExtResource("3_0cpfe")]
 position = Vector2(798, 262)
 scale = Vector2(5.636349, 5.636349)
-stats = SubResource("Resource_re7k7")
+stats = SubResource("Resource_24k53")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=835470885]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1565001597]
-position = Vector2(420, 391)
+position = Vector2(50, 603)
 shape = SubResource("RectangleShape2D_24k53")
 debug_color = Color(0.24347755, 0.5776359, 0.2577506, 0.41960785)
 
 [node name="Area2D2" type="Area2D" parent="." unique_id=1408191656]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=474881016]
-position = Vector2(705, 487)
+position = Vector2(1044, 564)
 shape = SubResource("RectangleShape2D_24k53")
 debug_color = Color(0.87931496, 1.540184e-06, 0.5139735, 0.41960785)
 

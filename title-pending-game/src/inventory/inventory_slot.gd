@@ -49,7 +49,7 @@ func add_item(new_item : Item, _amount : int = 0) -> void:
 	
 	is_slot_empty = false
 	is_slot_stackable = item.is_stackable
-	print(item.item_name + " Add to slot!\nSlot is no longer empty!\nSlot stackable: ", is_slot_stackable)
+	print(item.item_name + " Added to slot!\nSlot is no longer empty!\nSlot stackable: ", is_slot_stackable)
 	pass
 
 
@@ -109,8 +109,16 @@ func remove_item(_amount : int = 0) -> void:
 		if (quantity <= 0):
 			print("Removing " + item.item_name + " from Slot!")
 			quantity = 0
-			item = null
-			is_slot_empty = true		
+			#item = null
+			#is_slot_empty = true		
 	else:
 		print("There is no item present in this slot. \n Exiting removal procedure!")
+	pass
+
+
+func use_item(player : Player) -> void:
+	if item and quantity > 0:
+		item.use(player)
+		if item is ItemConsumable:
+			remove_item()
 	pass

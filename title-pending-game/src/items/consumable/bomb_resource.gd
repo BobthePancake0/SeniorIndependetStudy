@@ -1,5 +1,5 @@
 class_name BombResource
-extends ItemWeapon
+extends ItemConsumable
 
 func use(_player : Player = null) -> void:
 	print("asdasda")

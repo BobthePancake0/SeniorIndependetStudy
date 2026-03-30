@@ -16,12 +16,12 @@ extends State
 
 
 func can_enter() -> bool:
-	return player.has_sword
+	return player.ability_flags.has_sword
 
 func enter() -> void:
 	
 	$"../../StateDebug".text = name		## For Debugging
-	player.animation_player.play(matchAttackAngle(player.direction))
+	player.animation_player.play("attack_" + matchAttackAngle(player.direction))
 
 
 func exit() -> void:
@@ -45,20 +45,20 @@ func update(_delta : float) -> void:
 func matchAttackAngle(direction : Globals.Directions) -> String:
 	match direction:
 		Globals.Directions.RIGHT:
-			return "horizontal_r_attack"
+			return "right"
 		Globals.Directions.LEFT:
-			return "horizontal_l_attack"
+			return "left"
 		Globals.Directions.UP:
-			return "up_attack"
+			return "up"
 		Globals.Directions.DOWN:
-			return "down_attack"
+			return "down"
 		Globals.Directions.D_RIGHT:
-			return "diagonal_dr_attack"
+			return "down_right"
 		Globals.Directions.D_LEFT:
-			return "diagonal_dl_attack"
+			return "down_left"
 		Globals.Directions.U_LEFT:
-			return "diagonal_ul_attack"
+			return "up_left"
 		Globals.Directions.U_RIGHT:
-			return "diagonal_ur_attack"
+			return "up_right"
 		_:
 			return "RESET"

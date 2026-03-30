@@ -10,53 +10,78 @@ extends Resource
 ##
 
 
-@export var sword_slot : WeaponTest = null
+var sword_slot : InventorySlot = null
 @export var sword_button : String = "attack"
 
-@export var item_1_slot : Item = null
+var item_1_slot : InventorySlot = null
 @export var item_1_button : String = "item_1"
 
-@export var item_2_slot : Item = null
+var item_2_slot : InventorySlot = null
 @export var item_2_button : String = "item_2"
 
-@export var item_3_slot : Item = null
+var item_3_slot : InventorySlot = null
 @export var item_3_button : String = "item_3"
 
 
-var player
+var player		# set to the instance of the player on load
 
 
-func do_attack_button(event : InputEvent) -> bool:
+
+func assign_sword_slot(inventory_slot : InventorySlot) -> void:
+	if inventory_slot.item is WeaponTest:
+		sword_slot = inventory_slot
+
+func assign_item_slot(inventory_slot : InventorySlot, slot_number : int) -> void:
+	if inventory_slot.item:
+		match slot_number:
+			1:
+				item_1_slot = inventory_slot
+			2:
+				item_2_slot = inventory_slot
+			3:
+				item_3_slot = inventory_slot
+			_:
+				print("Not a viable slot number")
 	
-			
-	return false
+	print("Slot does not contain an item, cannot assign")
+
+func remove_item_slot(slot_number : int) -> void:
+	match slot_number:
+			1:
+				item_1_slot = null
+			2:
+				item_2_slot = null
+			3:
+				item_3_slot = null
+			_:
+				print("Not a viable slot number")
 			
 func do_button_input(event : InputEvent) -> bool:
 	
 	if !event is InputEventMouseMotion and !event.is_echo() and !event.is_released():
 		if event.is_action_pressed(sword_button):
-			if sword_slot && sword_slot.has_method("use"):
-				sword_slot.use(player)
+			if sword_slot :#&& sword_slot.has_method("use"):
+				sword_slot.use_item(player)
 				return true
 			else:
 				print("Cannot use that item")
 				return false
 
 		elif event.is_action_pressed(item_1_button):
-			if item_1_slot && item_1_slot.has_method("use"):
-				item_1_slot.use(player)
+			if item_1_slot :#&& item_1_slot.has_method("use"):
+				item_1_slot.use_item(player)
 				return true
 		elif event.is_action_pressed(item_2_button):
-			if item_2_slot && item_2_slot.has_method("use"):
-				item_2_slot.use(player)
+			if item_2_slot :#&& item_2_slot.has_method("use"):
+				item_2_slot.use_item(player)
 				return true
 		elif event.is_action_pressed(item_3_button):
-			if item_3_slot && item_3_slot.has_method("use"):
-				item_3_slot.use(player)
+			if item_3_slot :#&& item_3_slot.has_method("use"):
+				item_3_slot.use_item(player)
 				return true
 
-		print("Button cannot be Pressed.")
-		print("No Item present in the slot")
+		#print("Button cannot be Pressed.")
+		#print("No Item present in the slot")
 		return false
 	
 	return false

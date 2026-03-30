@@ -19,9 +19,14 @@ var direction_vector : Vector2 = Vector2(1,0)
 
 @export var state_machine : StateMachine
 
-@export_category("Can Do")
-@export var has_sword : bool = false
-@export var can_roll : bool = false
+#@export_category("Can Do")
+#@export var has_sword : bool = false
+#@export var can_roll : bool = false
+#const ability_flags : Dictionary[String, bool] = {
+	#"has_sword" : false,
+	#"can_roll" : false,
+#}
+var ability_flags := AbilityFlags.new()
 
 @export_category("Boxes")
 @export var hurt_box : Area2D
@@ -117,7 +122,8 @@ func _on_item_added(item : Item) -> void:
 				#get_node("HitBoxes/Marker2D/SwordHitBox").attack_power = slot.item.damage
 				#return
 	if item is WeaponTest:
-		has_sword = true
+		#has_sword = true
+		ability_flags.has_sword = true
 		get_node("HitBoxes/Marker2D/SwordHitBox").attack_power = item.damage
 		return
 	pass
@@ -128,10 +134,10 @@ func _on_item_added(item : Item) -> void:
 ## Sword Check:
 ##		If a Sword is removed from the inventory, player should not be able to attack. 
 func _on_item_removed() -> void:
-	if (has_sword):
+	if (ability_flags.has_sword):
 		for slot : InventorySlot in inventory.weapon_inventory:
 			if slot.item is WeaponTest:
 				return
-		has_sword = false
+		ability_flags.has_sword = false
 		return
 	pass

@@ -279,11 +279,11 @@ func test_inventory() -> void:
 	add_to_inventory(CONSUMABLE_TEST, 10)
 	
 	## Tests removing from the inventory
-	remove_from_inventory(CONSUMABLE_TEST)
-	remove_from_inventory(CONSUMABLE_TEST, 5)
-	remove_from_inventory(ITEM_TEST)
-	remove_from_inventory(ITEM_TEST)
-	remove_from_inventory(KEY_TEST)
+	#remove_from_inventory(CONSUMABLE_TEST)
+	#remove_from_inventory(CONSUMABLE_TEST, 5)
+	#remove_from_inventory(ITEM_TEST)
+	#remove_from_inventory(ITEM_TEST)
+	#remove_from_inventory(KEY_TEST)
 	
 	## Tests adding an item to the inventory of
 	## same resource

@@ -20,7 +20,7 @@ extends State
 
 
 func can_enter() -> bool:
-	return player.can_roll
+	return player.ability_flags.can_roll
 
 
 func enter() -> void:
