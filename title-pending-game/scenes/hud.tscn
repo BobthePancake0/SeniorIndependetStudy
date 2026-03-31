@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b228ltt5tlla7"]
+
+[ext_resource type="Script" uid="uid://bw3m7tmae2npl" path="res://src/test_hud.gd" id="1_ahhtf"]
+
+[node name="Hud" type="Control" unique_id=2113145409]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahhtf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1726935802]
+layout_mode = 0
+offset_left = 0.7
+offset_right = 169.7
+offset_bottom = 63.0
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=658350448]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Health: "
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Label" unique_id=1950060805]
+layout_mode = 0
+offset_left = 159.3
+offset_top = 14.0
+offset_right = 270.3
+offset_bottom = 54.0
+
+[node name="current" type="Label" parent="HBoxContainer/Label/HBoxContainer" unique_id=770811501]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "100"
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="HBoxContainer/Label/HBoxContainer" unique_id=542555113]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "/"
+metadata/_edit_lock_ = true
+
+[node name="max" type="Label" parent="HBoxContainer/Label/HBoxContainer" unique_id=1945399505]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "100"
+metadata/_edit_lock_ = true

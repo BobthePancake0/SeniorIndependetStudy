@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_pilpk")
 damage = 15
-item_name = "Item Test"
+item_name = "Wep Test"
 price = 100
 is_sellable = true

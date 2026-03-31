@@ -42,6 +42,7 @@ func take_damage(amount : int, damage_source : Node2D) -> void:
 func _on_health_set(value : int) -> void:
 	current_health = value
 	print("Health was set to " , current_health)
+	health_changed.emit(current_health, max_health)
 	
 	if current_health <= 0:
 		health_depleted.emit()

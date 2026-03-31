@@ -25,6 +25,9 @@ func get_is_paused() -> bool:
 func _on_paused() -> void:
 	if _is_paused:
 		get_tree().paused = true
+		PauseMenu.show()
 	else:
+		PauseMenu.hide()
 		get_tree().paused = false
+		
 		print("trying to figure out pausing!")

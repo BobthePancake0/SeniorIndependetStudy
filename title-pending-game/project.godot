@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://dhaakobjfklpg"
+PauseMenu="*uid://cevng4yt0hxt3"
 
 [global_group]
 
