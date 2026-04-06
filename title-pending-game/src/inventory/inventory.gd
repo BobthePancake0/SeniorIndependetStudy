@@ -123,17 +123,17 @@ func check_item_exists(item : Item, inventory) -> bool:
 ## _amount -> int (optional)
 ##		The amount of the item being added to an inventory
 ## 		Defaults to 0 if not passed through
-func add_to_inventory(item : Item, _amount : int = 0) -> void:
+func add_to_inventory(item : Item, _amount : int = 0, _index : int = -1) -> void:
 	var slot_type : String = match_item_type(item)
 	print("------------")
 	print(slot_type)
 	match slot_type:
 		"Key":
-			_item_to_inventory(item, key_inventory, _amount)
+			_item_to_inventory(item, key_inventory, _amount, _index)
 		"Weapon":
-			_item_to_inventory(item, weapon_inventory, _amount)
+			_item_to_inventory(item, weapon_inventory, _amount, _index)
 		"Consumable":
-			_item_to_inventory(item, consumable_inventory, _amount)
+			_item_to_inventory(item, consumable_inventory, _amount, _index)
 		_:
 			print("Item is not of an exitsing type.\nExiting Adding to Inventory!")
 
@@ -165,7 +165,7 @@ func add_to_inventory(item : Item, _amount : int = 0) -> void:
 ## _amount -> int (optional)
 ##		The amount of the item being added to an inventory
 ## 		Defaults to 0 if not passed through
-func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
+func _item_to_inventory(item: Item, inventory, _amount = 0, _index : int = -1) -> void:
 	if (item.is_stackable):
 		for slot : InventorySlot in inventory:
 			if slot.item == item:
@@ -177,6 +177,21 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 	if check_item_exists(item, inventory):
 		print(item.item_name + " already exists in Inventory!\nExiting Adding to Inventory!")
 		return
+	
+	## Section for adding item to a specific index
+	## should only matter for debugging purposes
+	if _index >= 0 and _index < 10:
+		var slot : InventorySlot = inventory[_index]
+		if slot.is_slot_empty:
+			slot.add_item(item, _amount)
+			item_added.emit(item)
+			return
+		print("Slot already contains an Item. Remove item before attempting to Add!")
+		return
+	elif _index >= 10:
+		print("Invalid Index Reached! Inventories only index from 0 -> 9!")
+		return
+		
 	
 	for slot : InventorySlot in inventory:
 		if slot.is_slot_empty:
@@ -200,17 +215,17 @@ func _item_to_inventory(item: Item, inventory, _amount = 0) -> void:
 ## _amount -> int (optional)
 ##		The amount of the item being removed from an inventory
 ##		Defaults to 0 if not passed through
-func remove_from_inventory(item : Item, _amount : int = 0) -> void:
+func remove_from_inventory(item : Item, _amount : int = 0, _index : int = -1) -> void:
 	var slot_type = match_item_type(item)
 	print("------------")
 	print(slot_type)
 	match slot_type:
 		"Key":
-			item_from_inventory(item, key_inventory, _amount)
+			_item_from_inventory(item, key_inventory, _amount, _index)
 		"Weapon":
-			item_from_inventory(item, weapon_inventory, _amount)
+			_item_from_inventory(item, weapon_inventory, _amount, _index)
 		"Consumable":
-			item_from_inventory(item, consumable_inventory, _amount)
+			_item_from_inventory(item, consumable_inventory, _amount, _index)
 		_:
 			print("Item is not of an exitsing type.\nExiting Adding to Inventory!")
 	pass
@@ -234,7 +249,22 @@ func remove_from_inventory(item : Item, _amount : int = 0) -> void:
 ## amount -> int 
 ##		The amount of the item being removed from an inventory
 ## 		will be 0 if not passed through from the parent function
-func item_from_inventory(item : Item, inventory, amount : int):
+func _item_from_inventory(item : Item, inventory, amount : int, _index : int = -1):
+	
+	## This section to remove an item from a specific slot index
+	## Should only be used for Debugging Purposes
+	if _index >= 0 and _index < 10:
+		var slot : InventorySlot = inventory[_index]
+		if !slot.is_slot_empty:
+			if slot.item == item:
+				slot.remove_item(amount)
+				item_removed.emit()
+				return
+	elif _index >= 10:
+		print("Invalid Index Reached! Inventories only index from 0 -> 9!")
+		return
+	
+	
 	for slot : InventorySlot in inventory:
 		if !slot.is_slot_empty:
 			if slot.item == item:

@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 GameManager="*uid://dhaakobjfklpg"
 PauseMenu="*uid://cevng4yt0hxt3"
+DebugMenu="*uid://bbdo1tnn2dlrt"
 
 [global_group]
 

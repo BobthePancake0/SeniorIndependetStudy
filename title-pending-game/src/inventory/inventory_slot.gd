@@ -109,8 +109,11 @@ func remove_item(_amount : int = 0) -> void:
 		if (quantity <= 0):
 			print("Removing " + item.item_name + " from Slot!")
 			quantity = 0
-			#item = null
-			#is_slot_empty = true		
+			
+			## In the actual game, items normally should never leave a slot
+			## comment this out during actual game **
+			item = null		# **
+			is_slot_empty = true		# **
 	else:
 		print("There is no item present in this slot. \n Exiting removal procedure!")
 	pass
