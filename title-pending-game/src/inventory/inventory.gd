@@ -104,10 +104,11 @@ func match_item_type(item : Item) -> String:
 ## RETURNS -> bool
 ##		T/F representation of the item being found
 func check_item_exists(item : Item, inventory) -> bool:
+
 	for slot : InventorySlot in inventory:
 		if slot.item == item:
 			return true
-	
+		
 	return false
 
 ### ADDS an ITEM to an INVENTORY
@@ -166,6 +167,33 @@ func add_to_inventory(item : Item, _amount : int = 0, _index : int = -1) -> void
 ##		The amount of the item being added to an inventory
 ## 		Defaults to 0 if not passed through
 func _item_to_inventory(item: Item, inventory, _amount = 0, _index : int = -1) -> void:
+	
+	
+	
+	
+	## Section for adding item to a specific index
+	## should only matter for debugging purposes
+	if _index >= 0 and _index < 10:
+		var slot : InventorySlot = inventory[_index]
+		if slot.is_slot_empty:
+			if check_item_exists(item, inventory):
+				print(item.item_name + " already exists in Inventory!\nExiting Adding to Inventory!")
+				return
+			slot.add_item(item, _amount)
+			item_added.emit(item)
+			return
+		elif slot.is_slot_stackable:
+			slot.add_item_quantity(_amount)
+			item_added.emit(item)
+			return
+		print("Slot already contains an Item. Remove item before attempting to Add!")
+		return
+	elif _index >= 10:
+		print("Invalid Index Reached! Inventories only index from 0 -> 9!")
+		return
+	
+
+	
 	if (item.is_stackable):
 		for slot : InventorySlot in inventory:
 			if slot.item == item:
@@ -174,23 +202,11 @@ func _item_to_inventory(item: Item, inventory, _amount = 0, _index : int = -1) -
 				return
 		print("There is no slot with " + item.item_name + " yet.\nChecking for next available slot!")
 	
+	
 	if check_item_exists(item, inventory):
 		print(item.item_name + " already exists in Inventory!\nExiting Adding to Inventory!")
 		return
 	
-	## Section for adding item to a specific index
-	## should only matter for debugging purposes
-	if _index >= 0 and _index < 10:
-		var slot : InventorySlot = inventory[_index]
-		if slot.is_slot_empty:
-			slot.add_item(item, _amount)
-			item_added.emit(item)
-			return
-		print("Slot already contains an Item. Remove item before attempting to Add!")
-		return
-	elif _index >= 10:
-		print("Invalid Index Reached! Inventories only index from 0 -> 9!")
-		return
 		
 	
 	for slot : InventorySlot in inventory:

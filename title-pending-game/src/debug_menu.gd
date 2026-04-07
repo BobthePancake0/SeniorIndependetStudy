@@ -12,6 +12,8 @@ var popup_menu : PopupMenu
 @export_subgroup("Selections")
 @export var slot_spinbox : SpinBox
 @export var item_options : OptionButton
+@export var add_quantity_section : HBoxContainer
+@export var remove_qauntity_section : HBoxContainer
 @export_subgroup("Buttons")
 @export var remove : Button
 @export var add : Button
@@ -22,7 +24,9 @@ var player : Player
 var inventory
 var slot : InventorySlot
 var item_uid_list : Array[String] = []
-var item_uid
+var item : Item
+var add_quantity : int = 1
+var remove_quantity : int = 1
 
 func _on_visibility_changed() -> void:
 	if visible:
@@ -40,6 +44,8 @@ func _ready() -> void:
 func setup() -> void:
 	remove.visible = false
 	add.visible = false
+	add_quantity_section.visible = false
+	remove_qauntity_section.visible = false
 	update_slot(int(slot_spinbox.value) - 1)
 
 func _on_id_pressed(id : int) -> void:
@@ -52,15 +58,15 @@ func change_mode(id : int) -> void:
 		0:
 			inventory_label.text = popup_menu.get_item_text(id)
 			inventory = player.inventory.weapon_inventory
-			add.visible = true
+
 		1: 
 			inventory_label.text = popup_menu.get_item_text(id)
 			inventory = player.inventory.consumable_inventory
-			add.visible = true
+
 		2: 
 			inventory_label.text = popup_menu.get_item_text(id)
 			inventory = player.inventory.key_inventory
-			add.visible = true
+
 		_:
 			print()
 	set_initial_mode_value()	
@@ -73,13 +79,23 @@ func set_initial_mode_value() -> void:
 
 func update_slot(value : int) -> void:
 	if inventory:
+		
 		slot = inventory[value]
+		add.visible = true
 		if slot.is_slot_empty:
 			current_item.text = "EMPTY"
 			remove.visible = false
 		else:
 			current_item.text = slot.item.item_name
 			remove.visible = true
+			if slot.quantity > 1:
+				remove_qauntity_section.visible = true
+			else:
+				remove_qauntity_section.visible = false
+		if add_quantity_section.visible:
+			add_quantity_section.get_child(1).value = 1
+		if remove_qauntity_section.visible:
+			remove_qauntity_section.get_child(1).value = 1
 		
 
 func _on_spin_box_value_changed(value: float) -> void:
@@ -119,10 +135,12 @@ func set_item_options() -> void:
 
 func _on_option_button_item_selected(index: int) -> void:
 	if item_options.get_item_text(index) == "":
-		item_uid = ""
+		item = null
 		pass
 	else:
-		item_uid = item_uid_list[index - 1]
+		item = load(item_uid_list[index - 1])
+		if item.is_stackable:
+			add_quantity_section.visible = true
 		#item_uid = "res://resources/items/" + inventory_label.text.to_lower() + "s/" + item_options.get_item_text(index) + ".tres"
 		pass
 	pass # Replace with function body.
@@ -130,19 +148,29 @@ func _on_option_button_item_selected(index: int) -> void:
 func _on_remove_pressed() -> void:
 	if player && slot && inventory:
 		var slot_number = slot_spinbox.value - 1
-		player.inventory.remove_from_inventory(slot.item, 0, slot_number)
+		player.inventory.remove_from_inventory(slot.item, remove_quantity, slot_number)
 		update_slot(slot_number)
 	pass # Replace with function body.
 
 
 func _on_add_pressed() -> void:
-	if item_uid and item_uid != "":
+	if item:
 
 		if player && slot && inventory:
-			if slot.is_slot_empty:
-				var item = load(item_uid)
-				if item is Item:
-					var slot_number = slot_spinbox.value - 1
-					player.inventory.add_to_inventory(item, 0, slot_number)
-					update_slot(slot_number)
+			#if slot.is_slot_empty:
+			#var item = load(item_uid)
+			if item is Item:
+				var slot_number = slot_spinbox.value - 1
+				player.inventory.add_to_inventory(item, add_quantity, slot_number)
+				update_slot(slot_number)
+	pass # Replace with function body.
+
+
+func _on_add_quantity_box_value_changed(value: float) -> void:
+	add_quantity = int(value)
+	pass # Replace with function body.
+
+
+func _on_remove_quantity_box_value_changed(value: float) -> void:
+	remove_quantity = int(value)
 	pass # Replace with function body.
