@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://dt5pd8vsclq5w"]
 
-[ext_resource type="Script" uid="uid://b6y5tvssdf1cx" path="res://src/pause_slot_test.gd" id="1_fcpls"]
+[ext_resource type="Script" uid="uid://b6y5tvssdf1cx" path="res://src/menus/pause/pause_slot_test.gd" id="1_fcpls"]
 
 [node name="Button" type="Button" unique_id=1750134030]
 offset_right = 72.0
 offset_bottom = 54.0
 text = "Null"
 script = ExtResource("1_fcpls")
+
+[node name="Marker" type="Control" parent="." unique_id=619666601]
+anchors_preset = 0
+offset_left = 46.0
+offset_top = 49.0
+offset_right = 58.510002
+offset_bottom = 61.415

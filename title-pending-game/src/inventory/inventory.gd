@@ -18,7 +18,7 @@ extends Resource
 ## Checks for the ability to use certain items when they are added
 ## to certain inventories
 signal item_added(item : Item)
-signal item_removed
+signal item_removed(item : Item)
 
 @export_category("Inventories")
 @export var key_inventory = []
@@ -273,8 +273,9 @@ func _item_from_inventory(item : Item, inventory, amount : int, _index : int = -
 		var slot : InventorySlot = inventory[_index]
 		if !slot.is_slot_empty:
 			if slot.item == item:
+				item_removed.emit(item)
 				slot.remove_item(amount)
-				item_removed.emit()
+				
 				return
 	elif _index >= 10:
 		print("Invalid Index Reached! Inventories only index from 0 -> 9!")
@@ -284,12 +285,44 @@ func _item_from_inventory(item : Item, inventory, amount : int, _index : int = -
 	for slot : InventorySlot in inventory:
 		if !slot.is_slot_empty:
 			if slot.item == item:
+				item_removed.emit(item)
 				slot.remove_item(amount)
-				item_removed.emit()
+				
 				return
 		
 	print(item.item_name + " not within the Inventory!\nExiting Remove to Inventory!")
 	return
+
+
+func get_inventory_slot(item : Item) -> InventorySlot:
+	if item is ItemWeapon:
+		for slot : InventorySlot in weapon_inventory:
+			if item == slot.item:
+				return slot
+	if item is ItemConsumable:
+		for slot : InventorySlot in consumable_inventory:
+			if item == slot.item:
+				return slot
+	if item is ItemKey:
+		for slot : InventorySlot in key_inventory:
+			if item == slot.item:
+				return slot
+	return null
+
+func inventory_has_item(item : Item) -> bool:
+	if item is ItemWeapon:
+		for slot : InventorySlot in weapon_inventory:
+			if item == slot.item:
+				return true
+	if item is ItemConsumable:
+		for slot : InventorySlot in consumable_inventory:
+			if item == slot.item:
+				return true
+	if item is ItemKey:
+		for slot : InventorySlot in key_inventory:
+			if item == slot.item:
+				return true
+	return false
 
 func test_inventory() -> void:
 	### Old Tester Code
@@ -336,5 +369,4 @@ func test_inventory() -> void:
 	## different instantiated 
 	const CONSUMABLE_TEST2 = preload("uid://cu3l6l6hxnsxa")
 	add_to_inventory(CONSUMABLE_TEST2, 50)
-	
 	

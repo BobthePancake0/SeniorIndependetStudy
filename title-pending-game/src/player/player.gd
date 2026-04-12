@@ -125,6 +125,12 @@ func _on_item_added(item : Item) -> void:
 		#has_sword = true
 		ability_flags.has_sword = true
 		get_node("HitBoxes/Marker2D/SwordHitBox").attack_power = item.damage
+		## Get specific inventory slot with item function to grab slot where sword weapon is
+		## Automatically equips the weapon slot to this weapon
+		## need to automatically unequip as well
+		var sword_slot : InventorySlot = inventory.get_inventory_slot(item)
+		if sword_slot:
+			equipment.assign_sword_slot(sword_slot)
 		return
 	pass
 
@@ -133,11 +139,13 @@ func _on_item_added(item : Item) -> void:
 ##
 ## Sword Check:
 ##		If a Sword is removed from the inventory, player should not be able to attack. 
-func _on_item_removed() -> void:
+func _on_item_removed(item : Item) -> void:
 	if (ability_flags.has_sword):
-		for slot : InventorySlot in inventory.weapon_inventory:
-			if slot.item is WeaponTest:
-				return
-		ability_flags.has_sword = false
+		#for slot : InventorySlot in inventory.weapon_inventory:
+			#if slot.item is WeaponTest:
+				#return
+		if inventory.inventory_has_item(item):
+			equipment.remove_sword_slot()
+			ability_flags.has_sword = false
 		return
 	pass

@@ -41,3 +41,25 @@ func assign_container_buttons(container : HBoxContainer, player_inventory) -> vo
 func _on_slot_pressed(slot : PauseMenuSlot) -> void:
 	print(slot.text)
 	
+	## Erase previous equip popup
+	var previous_popup : PauseMenuEquip = get_node_or_null("PauseEquip")
+	if previous_popup:
+		previous_popup.queue_free()
+		await previous_popup.tree_exited
+	
+	## Check for if the slots item is even equippable
+	if !slot.inventory_slot.item:
+		print("No Item Present")
+		return
+	
+	if !slot.inventory_slot.item.is_equippable:
+		print("Item is not Equippable!")
+		return
+	
+	const PAUSE_EQUIP = preload("uid://elq77su66dj0")
+	var new_equip : PauseMenuEquip = PAUSE_EQUIP.instantiate()
+	new_equip.slot = slot.inventory_slot
+	new_equip.position = slot.get_child(0).global_position
+	add_child(new_equip)
+	
+	

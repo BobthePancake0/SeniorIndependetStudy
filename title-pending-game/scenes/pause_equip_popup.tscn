@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://elq77su66dj0"]
+
+[ext_resource type="Script" uid="uid://dkmdqm6tc2647" path="res://src/menus/pause/pause_equip_popup.gd" id="1_rvqym"]
+
+[node name="PauseEquip" type="Panel" unique_id=129377840 node_paths=PackedStringArray("button_1", "button_2", "button_3")]
+offset_right = 140.0
+offset_bottom = 51.0
+scale = Vector2(1.1225879, 1.1225879)
+focus_mode = 2
+script = ExtResource("1_rvqym")
+button_1 = NodePath("MarginContainer/GridContainer/Button")
+button_2 = NodePath("MarginContainer/GridContainer/Button2")
+button_3 = NodePath("MarginContainer/GridContainer/Button3")
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=101132421]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 1.0
+offset_right = 142.0
+offset_bottom = 32.0
+scale = Vector2(0.67348707, 0.5534871)
+
+[node name="Exit" type="Button" parent="MarginContainer2" unique_id=721952992]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75889134, 0, 0.06912999, 1)
+text = "X"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1321774411]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 49.0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer" unique_id=101985300]
+layout_mode = 2
+theme_override_constants/h_separation = 21
+columns = 4
+
+[node name="Button" type="Button" parent="MarginContainer/GridContainer" unique_id=1589025635]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "1"
+
+[node name="Button2" type="Button" parent="MarginContainer/GridContainer" unique_id=171068725]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "2"
+
+[node name="Button3" type="Button" parent="MarginContainer/GridContainer" unique_id=1782702225]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "3"
+
+[connection signal="pressed" from="MarginContainer2/Exit" to="." method="_on_exit_pressed"]

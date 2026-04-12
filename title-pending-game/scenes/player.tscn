@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://da6fw2c7bids5" path="res://src/hurtbox.gd" id="4_fjrip"]
 [ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="4_smehm"]
 [ext_resource type="Script" uid="uid://kty5y33cda7p" path="res://src/states/player/move_state.gd" id="5_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://c3evjcmy0cgmd" path="res://assets/testing_sprite.png" id="6_a8ls1"]
 [ext_resource type="Script" uid="uid://dl2cijdjioh5o" path="res://src/states/player/attack_state.gd" id="9_ur7pv"]
 [ext_resource type="Script" uid="uid://c8omx3f7vhle7" path="res://src/states/player/damaged_state.gd" id="11_d2wvv"]
 [ext_resource type="Script" uid="uid://eflve3uq3p34" path="res://src/states/player/roll_state.gd" id="12_3v2ag"]
@@ -40,6 +41,9 @@ shader_parameter/hit_flash_on = false
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_a8ls1")
+}, {
 "duration": 1.0,
 "texture": ExtResource("1_3vyb7")
 }],
@@ -640,7 +644,7 @@ radius = 83.14531
 radius = 58.54012
 
 [node name="Player" type="CharacterBody2D" unique_id=807857446 node_paths=PackedStringArray("state_machine", "hurt_box") groups=["Player"]]
-scale = Vector2(0.7523974, 0.7523974)
+texture_filter = 1
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_g2els")

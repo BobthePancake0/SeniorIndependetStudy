@@ -8,3 +8,4 @@ damage = 15
 item_name = "Wep Test"
 price = 100
 is_sellable = true
+is_equippable = false

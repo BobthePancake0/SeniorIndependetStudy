@@ -45,7 +45,7 @@ size = Vector2(65, 62)
 script = ExtResource("1_0j4l2")
 
 [node name="CharacterPlayer" parent="." unique_id=807857446 instance=ExtResource("1_nbq8v")]
-position = Vector2(133, 320)
+position = Vector2(138, 207)
 collision_mask = 3
 stats = SubResource("Resource_4o3qb")
 inventory = SubResource("Resource_8trvs")
@@ -55,7 +55,7 @@ equipment = SubResource("Resource_24k53")
 tile_set = SubResource("TileSet_0cpfe")
 
 [node name="EnemyTester" parent="." unique_id=332754568 instance=ExtResource("3_0cpfe")]
-position = Vector2(798, 262)
+position = Vector2(497.00003, 159)
 scale = Vector2(5.636349, 5.636349)
 stats = SubResource("Resource_tttw2")
 
@@ -76,7 +76,7 @@ shape = SubResource("RectangleShape2D_24k53")
 debug_color = Color(0.87931496, 1.540184e-06, 0.5139735, 0.41960785)
 
 [node name="Bomb" parent="." unique_id=1623780900 instance=ExtResource("10_8trvs")]
-position = Vector2(387, 203)
+position = Vector2(315.00003, 153.00002)
 
 [node name="Control" parent="." unique_id=2113145409 instance=ExtResource("9_4o3qb")]
 anchors_preset = 0

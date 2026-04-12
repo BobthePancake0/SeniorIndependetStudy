@@ -10,6 +10,7 @@ extends Resource
 @export_category("misc")
 @export var is_stackable : bool = false
 @export var is_sellable : bool = false
+@export var is_equippable: bool = true 
 
 
 

@@ -31,14 +31,20 @@ func assign_sword_slot(inventory_slot : InventorySlot) -> void:
 	if inventory_slot.item is WeaponTest:
 		sword_slot = inventory_slot
 
+func remove_sword_slot() -> void:
+	sword_slot = null
+
 func assign_item_slot(inventory_slot : InventorySlot, slot_number : int) -> void:
-	if inventory_slot.item:
+	if inventory_slot.item && inventory_slot.item.is_equippable:
 		match slot_number:
 			1:
+				print("Assigning a slot with " + inventory_slot.item.item_name + " inventory equipment slot " , slot_number, "!")
 				item_1_slot = inventory_slot
 			2:
+				print("Assigning a slot with " + inventory_slot.item.item_name + " inventory equipment slot " , slot_number, "!")
 				item_2_slot = inventory_slot
 			3:
+				print("Assigning a slot with " + inventory_slot.item.item_name + " inventory equipment slot " , slot_number, "!")
 				item_3_slot = inventory_slot
 			_:
 				print("Not a viable slot number")

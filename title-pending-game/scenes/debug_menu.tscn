@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbdo1tnn2dlrt"]
 
-[ext_resource type="Script" uid="uid://bqsaucc8edpme" path="res://src/debug_menu.gd" id="1_rta6x"]
+[ext_resource type="Script" uid="uid://bqsaucc8edpme" path="res://src/menus/debug_menu.gd" id="1_rta6x"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=394319970 node_paths=PackedStringArray("menu_button", "inventory_label", "current_item", "slot_spinbox", "item_options", "add_quantity_section", "remove_qauntity_section", "remove", "add")]
 process_mode = 2
