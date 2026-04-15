@@ -14,8 +14,9 @@ var direction : Globals.Directions = Globals.Directions.RIGHT
 var direction_vector : Vector2 = Vector2(1,0)
 
 @export_category("Animations")
-@onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
-@onready var effects_animation_player: AnimationPlayer = $AnimatedSprite2D/Effects
+@export var animated_sprite_2d: AnimatedSprite2D 
+@export var animation_player: AnimationPlayer
+@export var effects_animation_player: AnimationPlayer
 
 @export var state_machine : StateMachine
 
@@ -68,21 +69,30 @@ func get_movement_direction() -> Vector2:
 ## Sets the players stated direction
 ## Based on their vectored movement
 func setDirection(dir : Vector2) -> Globals.Directions:
+	#print(dir)
 	if dir == Vector2.RIGHT: #Vector2(1, 0)
+		direction_vector = dir
 		return Globals.Directions.RIGHT
 	elif dir.x > 0 && dir.y > 0: 
+		direction_vector = dir
 		return Globals.Directions.D_RIGHT
 	elif dir == Vector2.DOWN: # Vector2(0, 1)
+		direction_vector = dir
 		return Globals.Directions.DOWN
 	elif dir.x < 0 && dir.y > 0:
+		direction_vector = dir
 		return Globals.Directions.D_LEFT
 	elif dir == Vector2.LEFT: # Vector2(-1, 0)
+		direction_vector = dir
 		return Globals.Directions.LEFT
 	elif dir.x < 0 && dir.y < 0:
+		direction_vector = dir
 		return Globals.Directions.U_LEFT
 	elif dir == Vector2.UP: # Vector2(0, -1)
+		direction_vector = dir
 		return Globals.Directions.UP
 	elif dir. x > 0 && dir.y < 0:
+		direction_vector = dir
 		return Globals.Directions.U_RIGHT
 
 	return direction

@@ -20,7 +20,10 @@ extends State
 func enter() -> void:
 	## For Debugging
 	$"../../StateDebug".text = name
+	#await owner.ready
+	match_direction_animation(player.direction, "Idle/idle", previous_anim_direction)
 	player.velocity = Vector2.ZERO
+	
 
 
 
