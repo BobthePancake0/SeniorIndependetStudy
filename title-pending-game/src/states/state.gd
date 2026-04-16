@@ -73,7 +73,7 @@ func can_transition(new_state : State) -> bool:
 			#print("Nothing ever Matches!")
 func match_direction_animation(direction : Globals.Directions, animation_name : String, _animation_end : String = "") -> void:
 	var animation_player : AnimationPlayer = player.animation_player
-	print("animation direction: " , direction)
+	#print("animation direction: " , direction)
 	
 	if _animation_end > "":
 		if animation_player.has_animation(animation_name + _animation_end):
@@ -116,12 +116,26 @@ func match_direction_animation(direction : Globals.Directions, animation_name : 
 				print("Animation not found to the DOWN")
 		_:	## No Diagonal Animations. Fallback
 			print("Nothing ever Matches! Fallback Animation")
-			if animation_player.has_animation(animation_name + previous_anim_direction):
-				#previous_anim_direction = AnimDirection.RSIDE
-				#previous_anim_direction = _animation_end
-				animation_player.play(animation_name + previous_anim_direction)
-			else:
-				print("Animation not found to the " + previous_anim_direction)
+			if direction == Globals.Directions.U_RIGHT || direction == Globals.Directions.U_LEFT:
+					if animation_player.has_animation(animation_name + "_up"):
+						#previous_anim_direction = AnimDirection.DOWN
+						#previous_anim_direction = "_down"
+						animation_player.play(animation_name + "_up")
+					else:
+						print("Animation not found to the DOWN")
+			elif direction == Globals.Directions.D_RIGHT || direction == Globals.Directions.D_LEFT:
+					if animation_player.has_animation(animation_name + "_down"):
+						#previous_anim_direction = AnimDirection.DOWN
+						#previous_anim_direction = "_down"
+						animation_player.play(animation_name + "_down")
+					else:
+						print("Animation not found to the DOWN")
+			#if animation_player.has_animation(animation_name + previous_anim_direction):
+				##previous_anim_direction = AnimDirection.RSIDE
+				##previous_anim_direction = _animation_end
+				#animation_player.play(animation_name + previous_anim_direction)
+			#else:
+				#print("Animation not found to the " + previous_anim_direction)
 			#match previous_anim_direction:
 				#AnimDirection.RSIDE:
 					#player.animated_sprite_2d.flip_h = false
