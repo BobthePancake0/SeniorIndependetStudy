@@ -83,21 +83,24 @@ func match_direction_animation(direction : Globals.Directions, animation_name : 
 		else:
 			print("Animation not found to the " + _animation_end)
 	
+	#### NEED to MOST LIKELY make separate animations for RIGHt and LEFT to make it easier
+	##   While this does unnecessarily reuse stuff, it will make more specifics easier I guess
+	## 		Can do the flip_h in the animation as well
 	match direction:
 		Globals.Directions.RIGHT:
-			player.animated_sprite_2d.flip_h = false
-			if animation_player.has_animation(animation_name + "_side"):
+			#player.animated_sprite_2d.flip_h = false
+			if animation_player.has_animation(animation_name + "_right"):
 				#previous_anim_direction = AnimDirection.RSIDE
-				previous_anim_direction = "_side"
-				animation_player.play(animation_name + "_side")
+				previous_anim_direction = "_right"
+				animation_player.play(animation_name + "_right")
 			else:
 				print("Animation not found to the RIGHT")
 		Globals.Directions.LEFT:
-			player.animated_sprite_2d.flip_h = true
-			if animation_player.has_animation(animation_name + "_side"):
+			#player.animated_sprite_2d.flip_h = true
+			if animation_player.has_animation(animation_name + "_left"):
 				#previous_anim_direction = AnimDirection.LSIDE
-				previous_anim_direction = "_side"
-				animation_player.play(animation_name + "_side")
+				previous_anim_direction = "_left"
+				animation_player.play(animation_name + "_left")
 			else:
 				print("Animation not found to the LEFT")
 		Globals.Directions.UP:
@@ -115,6 +118,7 @@ func match_direction_animation(direction : Globals.Directions, animation_name : 
 			else:
 				print("Animation not found to the DOWN")
 		_:	## No Diagonal Animations. Fallback
+			## I dont like how these diagonals are handled, but it'll work for now
 			print("Nothing ever Matches! Fallback Animation")
 			if direction == Globals.Directions.U_RIGHT || direction == Globals.Directions.U_LEFT:
 					if animation_player.has_animation(animation_name + "_up"):
@@ -130,34 +134,3 @@ func match_direction_animation(direction : Globals.Directions, animation_name : 
 						animation_player.play(animation_name + "_down")
 					else:
 						print("Animation not found to the DOWN")
-			#if animation_player.has_animation(animation_name + previous_anim_direction):
-				##previous_anim_direction = AnimDirection.RSIDE
-				##previous_anim_direction = _animation_end
-				#animation_player.play(animation_name + previous_anim_direction)
-			#else:
-				#print("Animation not found to the " + previous_anim_direction)
-			#match previous_anim_direction:
-				#AnimDirection.RSIDE:
-					#player.animated_sprite_2d.flip_h = false
-					#if animation_player.has_animation(animation_name + "_side"):
-						#animation_player.play(animation_name + "_side")
-					#else:
-						#print("Animation not found to the RIGHT")
-				#AnimDirection.LSIDE:
-					#player.animated_sprite_2d.flip_h = true
-					#if animation_player.has_animation(animation_name + "_side"):
-						#animation_player.play(animation_name + "_side")
-					#else:
-						#print("Animation not found to the LEFT")
-				#AnimDirection.UP:
-					#if animation_player.has_animation(animation_name + "_up"):
-						#animation_player.play(animation_name + "_up")
-					#else:
-						#print("Animation not found to the UP")
-				#AnimDirection.DOWN:
-					#if animation_player.has_animation(animation_name + "_down"):
-						#animation_player.play(animation_name + "_down")
-					#else:
-						#print("Animation not found to the DOWN")
-				#_: 
-					#print("No more Fallback. Damn")

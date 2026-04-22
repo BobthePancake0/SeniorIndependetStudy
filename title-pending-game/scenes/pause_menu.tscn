@@ -6,6 +6,8 @@
 [node name="PauseMenu" type="CanvasLayer" unique_id=1994324578]
 process_mode = 2
 layer = 10
+scale = Vector2(0.417, 0.417)
+transform = Transform2D(0.417, 0, 0, 0.417, 0, 0)
 script = ExtResource("1_n87rw")
 
 [node name="Control" type="Control" parent="." unique_id=1036389124]

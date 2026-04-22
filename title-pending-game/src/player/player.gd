@@ -95,6 +95,7 @@ func setDirection(dir : Vector2) -> Globals.Directions:
 		direction_vector = dir
 		return Globals.Directions.U_RIGHT
 
+
 	return direction
 	
 

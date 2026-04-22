@@ -21,7 +21,8 @@ func can_enter() -> bool:
 func enter() -> void:
 	
 	$"../../StateDebug".text = name		## For Debugging
-	player.animation_player.play("attack_" + matchAttackAngle(player.direction))
+	#player.animation_player.play("attack_" + matchAttackAngle(player.direction))
+	match_direction_animation(player.direction, "Attack/sword")
 
 
 func exit() -> void:

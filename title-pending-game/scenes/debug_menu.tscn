@@ -18,14 +18,19 @@ add = NodePath("Base/HFlowContainer/MarginContainer2/VBoxContainer2/Add")
 
 [node name="Base" type="Control" parent="." unique_id=1535129850]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Base" unique_id=1983735838]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.6862745)
 
 [node name="MenuButton" type="MenuButton" parent="Base" unique_id=1907073143]
@@ -34,6 +39,7 @@ offset_left = 8.0
 offset_top = 7.0
 offset_right = 136.0
 offset_bottom = 75.0
+scale = Vector2(0.35808015, 0.35808015)
 theme_override_font_sizes/font_size = 49
 text = "Inventories"
 item_count = 3
@@ -46,20 +52,22 @@ popup/item_2/id = 2
 
 [node name="Label" type="Label" parent="Base" unique_id=727412380]
 layout_mode = 0
-offset_left = 378.0
-offset_top = 67.0
-offset_right = 758.0
-offset_bottom = 185.0
+offset_left = 138.0
+offset_top = 33.0
+offset_right = 518.0
+offset_bottom = 151.0
+scale = Vector2(0.44579428, 0.44579428)
 theme_override_font_sizes/font_size = 86
 text = "N/A"
 horizontal_alignment = 1
 
 [node name="HFlowContainer" type="HBoxContainer" parent="Base" unique_id=1107493334]
 layout_mode = 0
-offset_left = 330.0
-offset_top = 183.0
-offset_right = 910.0
-offset_bottom = 343.0
+offset_left = 105.0
+offset_top = 89.0
+offset_right = 685.0
+offset_bottom = 281.0
+scale = Vector2(0.44579428, 0.44579428)
 theme_override_constants/separation = 67
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Base/HFlowContainer" unique_id=1102569288]
