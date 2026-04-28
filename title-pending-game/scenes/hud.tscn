@@ -2,6 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bw3m7tmae2npl" path="res://src/menus/test_hud.gd" id="1_ahhtf"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahhtf"]
+bg_color = Color(0.18715167, 0.18715167, 0.18715167, 1)
+skew = Vector2(0.12, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 1
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1001518930]
 layer = 9
 
@@ -58,3 +67,58 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "100"
 metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hud" unique_id=433795316]
+layout_mode = 0
+offset_left = 149.145
+offset_top = -1.0
+offset_right = 257.1449
+offset_bottom = 37.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud/VBoxContainer" unique_id=1312018481]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_bottom = -4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hud/VBoxContainer/MarginContainer" unique_id=1468725234]
+layout_mode = 2
+theme_override_constants/separation = 26
+
+[node name="Label" type="Label" parent="Hud/VBoxContainer/MarginContainer/HBoxContainer" unique_id=158428600]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "C"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Hud/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1380850449]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "V"
+
+[node name="Label3" type="Label" parent="Hud/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1695400314]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Ctrl"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Hud/VBoxContainer" unique_id=1551087704]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Label" type="Label" parent="Hud/VBoxContainer/HBoxContainer2" unique_id=1840748066]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_ahhtf")
+text = "null"
+
+[node name="Label2" type="Label" parent="Hud/VBoxContainer/HBoxContainer2" unique_id=204967145]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_ahhtf")
+text = "null"
+
+[node name="Label3" type="Label" parent="Hud/VBoxContainer/HBoxContainer2" unique_id=1922673634]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_ahhtf")
+text = "null"

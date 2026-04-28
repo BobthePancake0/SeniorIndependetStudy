@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Bow" format=3 uid="uid://cdc5o060fxco8"]
+
+[ext_resource type="Script" uid="uid://csjwtwclw6m8h" path="res://src/items/weapon/bow_test.gd" id="1_fov54"]
+
+[resource]
+script = ExtResource("1_fov54")
+item_name = "Bow"
+is_sellable = true
+metadata/_custom_type_script = "uid://csjwtwclw6m8h"

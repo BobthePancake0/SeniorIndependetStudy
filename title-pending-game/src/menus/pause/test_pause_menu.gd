@@ -35,11 +35,11 @@ func assign_container_buttons(container : HBoxContainer, player_inventory) -> vo
 		for slot_number in container.get_child_count():
 			var slot_button : PauseMenuSlot = container.get_child(slot_number)
 			slot_button.inventory_slot = player_inventory[slot_number]
-			if not slot_button.pressed.get_connections():
-				slot_button.pressed.connect(_on_slot_pressed.bind(slot_button))
+			if not slot_button.button.pressed.get_connections():
+				slot_button.button.pressed.connect(_on_slot_pressed.bind(slot_button))
 
 func _on_slot_pressed(slot : PauseMenuSlot) -> void:
-	print(slot.text)
+	#print(slot.text)
 	
 	## Erase previous equip popup
 	var previous_popup : PauseMenuEquip = get_node_or_null("PauseEquip")
@@ -59,7 +59,7 @@ func _on_slot_pressed(slot : PauseMenuSlot) -> void:
 	const PAUSE_EQUIP = preload("uid://elq77su66dj0")
 	var new_equip : PauseMenuEquip = PAUSE_EQUIP.instantiate()
 	new_equip.slot = slot.inventory_slot
-	new_equip.position = slot.get_child(0).global_position
+	new_equip.position = slot.get_equippable_spawn_pos() #slot.get_child(0).global_position
 	add_child(new_equip)
 	
 	

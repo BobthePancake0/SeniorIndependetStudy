@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://c8omx3f7vhle7" path="res://src/states/player/damaged_state.gd" id="11_d2wvv"]
 [ext_resource type="Script" uid="uid://eflve3uq3p34" path="res://src/states/player/roll_state.gd" id="12_3v2ag"]
 [ext_resource type="Script" uid="uid://b0lwbtodoau25" path="res://src/states/player/item_state_bomb.gd" id="15_oprun"]
+[ext_resource type="Script" uid="uid://ci50i07nkd7fc" path="res://src/states/player/item_state_bow.gd" id="18_fulsm"]
 
 [sub_resource type="Resource" id="Resource_fjrip"]
 resource_local_to_scene = true
@@ -1254,6 +1255,294 @@ _data = {
 &"sword_up": SubResource("Animation_8txt3")
 }
 
+[sub_resource type="Animation" id="Animation_j2b1d"]
+resource_name = "fail_bow_down"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+
+[sub_resource type="Animation" id="Animation_cs1tg"]
+resource_name = "fail_bow_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5707963267948966]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+
+[sub_resource type="Animation" id="Animation_2dvfe"]
+resource_name = "fail_bow_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.71238898038469]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+
+[sub_resource type="Animation" id="Animation_giy8y"]
+resource_name = "fail_bow_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.141592653589793]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+
+[sub_resource type="Animation" id="Animation_bj30b"]
+resource_name = "use_bow_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/ItemStateBow")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_arrow"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jc3p3"]
+resource_name = "use_bow_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5707963267948966]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/ItemStateBow")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_arrow"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_hax0n"]
+resource_name = "use_bow_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.71238898038469]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/ItemStateBow")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_arrow"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_t4otl"]
+resource_name = "use_bow_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HitBoxes/Marker2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.141592653589793]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateDebug:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Bow"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StateMachine/ItemStateBow")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_arrow"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jc3p3"]
+_data = {
+&"fail_bow_down": SubResource("Animation_j2b1d"),
+&"fail_bow_left": SubResource("Animation_cs1tg"),
+&"fail_bow_right": SubResource("Animation_2dvfe"),
+&"fail_bow_up": SubResource("Animation_giy8y"),
+&"use_bow_down": SubResource("Animation_bj30b"),
+&"use_bow_left": SubResource("Animation_jc3p3"),
+&"use_bow_right": SubResource("Animation_hax0n"),
+&"use_bow_up": SubResource("Animation_t4otl")
+}
+
 [sub_resource type="Animation" id="Animation_dt7fs"]
 resource_name = "idle_down"
 length = 0.6
@@ -1587,8 +1876,8 @@ _data = {
 &"hit_flash": SubResource("Animation_a8ls1")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(74.3839, 52.290245)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fulsm"]
+size = Vector2(74.3839, 62.748295)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ur7pv"]
 radius = 10.195802
@@ -1620,6 +1909,7 @@ animation = &"Run-down"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=619613801]
 libraries/ = SubResource("AnimationLibrary_smehm")
 libraries/Attack = SubResource("AnimationLibrary_2w11d")
+libraries/Bow = SubResource("AnimationLibrary_jc3p3")
 libraries/Idle = SubResource("AnimationLibrary_gl8cc")
 libraries/Movement = SubResource("AnimationLibrary_ha2mi")
 
@@ -1627,9 +1917,8 @@ libraries/Movement = SubResource("AnimationLibrary_ha2mi")
 libraries/ = SubResource("AnimationLibrary_qfm1y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1694851801]
-position = Vector2(-0.5000002, 1.0000002)
 scale = Vector2(0.12099393, -0.19124025)
-shape = SubResource("RectangleShape2D_qhqgy")
+shape = SubResource("RectangleShape2D_fulsm")
 
 [node name="HitBoxes" type="Node2D" parent="." unique_id=992294143]
 
@@ -1647,6 +1936,9 @@ scale = Vector2(1.863512, -0.8733822)
 shape = SubResource("CircleShape2D_ur7pv")
 disabled = true
 debug_color = Color(0.87155205, 0.30202132, 0.46169508, 0.41960785)
+
+[node name="Marker2D" type="Marker2D" parent="HitBoxes/Marker2D" unique_id=1297274189]
+position = Vector2(0, 10)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=977158760]
 collision_mask = 2
@@ -1674,12 +1966,12 @@ initial_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=763769217 node_paths=PackedStringArray("transition_list", "player")]
 script = ExtResource("3_qhqgy")
-transition_list = [NodePath("../DamagedState"), NodePath("../MoveState"), NodePath("../AttackState"), NodePath("../RollState"), NodePath("../ItemStateBomb")]
+transition_list = [NodePath("../DamagedState"), NodePath("../MoveState"), NodePath("../AttackState"), NodePath("../RollState"), NodePath("../ItemStateBomb"), NodePath("../ItemStateBow")]
 player = NodePath("../..")
 
 [node name="MoveState" type="Node" parent="StateMachine" unique_id=654932214 node_paths=PackedStringArray("transition_list", "player")]
 script = ExtResource("5_qlg0r")
-transition_list = [NodePath("../DamagedState"), NodePath("../IdleState"), NodePath("../AttackState"), NodePath("../RollState"), NodePath("../ItemStateBomb")]
+transition_list = [NodePath("../DamagedState"), NodePath("../IdleState"), NodePath("../AttackState"), NodePath("../RollState"), NodePath("../ItemStateBomb"), NodePath("../ItemStateBow")]
 player = NodePath("../..")
 
 [node name="AttackState" type="Node" parent="StateMachine" unique_id=1748214379 node_paths=PackedStringArray("transition_list", "player")]
@@ -1702,4 +1994,10 @@ player = NodePath("../..")
 [node name="ItemStateBomb" type="Node" parent="StateMachine" unique_id=2041992996 node_paths=PackedStringArray("transition_list", "player")]
 script = ExtResource("15_oprun")
 transition_list = [NodePath("../DamagedState"), NodePath("../IdleState"), NodePath("../MoveState")]
+player = NodePath("../..")
+
+[node name="ItemStateBow" type="Node" parent="StateMachine" unique_id=1102282392 node_paths=PackedStringArray("spawn_position", "transition_list", "player")]
+script = ExtResource("18_fulsm")
+spawn_position = NodePath("../../HitBoxes/Marker2D/Marker2D")
+transition_list = [NodePath("../DamagedState"), NodePath("../MoveState"), NodePath("../IdleState")]
 player = NodePath("../..")

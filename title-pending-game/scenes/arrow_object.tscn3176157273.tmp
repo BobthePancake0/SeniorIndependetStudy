@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bqlwsxp4qaoe2"]
+
+[ext_resource type="Texture2D" uid="uid://bfyohjlc432ba" path="res://icon.svg" id="1_exhja"]
+[ext_resource type="Script" uid="uid://bejbv53fxuaap" path="res://src/items/consumable/arrow_object.gd" id="1_l10qb"]
+[ext_resource type="Script" uid="uid://cyomceusfgvxm" path="res://src/hitbox.gd" id="2_l10qb"]
+[ext_resource type="Resource" uid="uid://bwgyrxpo3ujnx" path="res://resources/items/consumables/arrow_resource.tres" id="2_pjktj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjktj"]
+size = Vector2(2, 23)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pjktj"]
+radius = 20.298367
+
+[node name="Arrow" type="RigidBody2D" unique_id=131062980 node_paths=PackedStringArray("timer", "hitbox")]
+mass = 0.001
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+script = ExtResource("1_l10qb")
+arrow_data = ExtResource("2_pjktj")
+timer = NodePath("Timer")
+hitbox = NodePath("Hitbox")
+
+[node name="Node2D" type="Sprite2D" parent="." unique_id=1146278780]
+scale = Vector2(0.02, 0.21)
+texture = ExtResource("1_exhja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=959251504]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_pjktj")
+disabled = true
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1891766639]
+scale = Vector2(0.203125, 0.203125)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_l10qb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=836198208]
+position = Vector2(0, 59.076927)
+shape = SubResource("CircleShape2D_pjktj")
+debug_color = Color(0.9584449, 9.62615e-07, 0.52974755, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=1483717873]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

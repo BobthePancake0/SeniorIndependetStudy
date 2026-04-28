@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cjmcrxii8jlh5"]
+
+[ext_resource type="Script" uid="uid://dnvca2evwkif8" path="res://src/camera_navigation.gd" id="1_ek5y8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek5y8"]
+size = Vector2(4, 20.056284)
+
+[node name="Camera2D" type="Camera2D" unique_id=563049590 node_paths=PackedStringArray("timer")]
+position_smoothing_enabled = true
+script = ExtResource("1_ek5y8")
+timer = NodePath("Timer")
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1053945441]
+
+[node name="Right" type="Area2D" parent="." unique_id=1937492488]
+position = Vector2(240, 0)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right" unique_id=1464862115]
+scale = Vector2(1, 12.764079)
+shape = SubResource("RectangleShape2D_ek5y8")
+metadata/_edit_lock_ = true
+
+[node name="Left" type="Area2D" parent="." unique_id=1900632381]
+position = Vector2(-240, 0)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left" unique_id=251635426]
+scale = Vector2(1, 12.764079)
+shape = SubResource("RectangleShape2D_ek5y8")
+metadata/_edit_lock_ = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Right" to="." method="_on_right_area_entered"]
+[connection signal="area_entered" from="Left" to="." method="_on_left_area_entered"]

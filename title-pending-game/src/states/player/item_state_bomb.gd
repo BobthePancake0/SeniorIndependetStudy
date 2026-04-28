@@ -13,7 +13,6 @@ func enter() -> void:
 	print("hitting")
 	player.animation_player.play("use_bomb_" + match_angle_name(player.direction))
 	
-	print()
 
 
 func exit() -> void:

@@ -9,6 +9,7 @@ extends Resource
 ## When that button is pressed, if an item is assigned and has a USE function, it is called
 ##
 
+signal item_equipped(slot_number : int, item_slot : InventorySlot)
 
 var sword_slot : InventorySlot = null
 @export var sword_button : String = "attack"
@@ -48,6 +49,8 @@ func assign_item_slot(inventory_slot : InventorySlot, slot_number : int) -> void
 				item_3_slot = inventory_slot
 			_:
 				print("Not a viable slot number")
+				return
+		item_equipped.emit(slot_number, inventory_slot)
 	
 	print("Slot does not contain an item, cannot assign")
 

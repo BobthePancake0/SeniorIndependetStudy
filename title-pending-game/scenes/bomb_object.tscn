@@ -100,7 +100,6 @@ _data = {
 radius = 103.38462
 
 [node name="Bomb" type="Node2D" unique_id=1623780900]
-scale = Vector2(1.8, 1.8)
 script = ExtResource("1_cdrpn")
 bomb_data = ExtResource("2_s51hb")
 
@@ -117,6 +116,7 @@ libraries/ = SubResource("AnimationLibrary_02ld8")
 position = Vector2(0, 5.9604645e-08)
 scale = Vector2(0.203125, 0.203125)
 collision_layer = 0
+collision_mask = 3
 script = ExtResource("4_2kf3b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=967880588]
