@@ -10,9 +10,10 @@ var player : Player
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
-	print(player.stats)
+	if player:
+		print(player.stats)
 	
-	connect_signals()
+		connect_signals()
 
 
 func connect_signals() -> void:

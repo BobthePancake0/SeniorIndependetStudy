@@ -29,7 +29,7 @@ max_health_label = NodePath("HBoxContainer/MarginContainer/HBoxContainer2/max")
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 32.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.21176471)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Hud" unique_id=1726935802]
 layout_mode = 0
